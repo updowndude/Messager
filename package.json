@@ -1,0 +1,54 @@
+{
+  "name": "Messager",
+  "version": "0.0.1",
+  "description": "inclass overworking assigment",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp & babel-node index.js",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "Correy Winke",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/updowndude/Messager"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap.native": "^1.0.3",
+    "express": "^4.14.0",
+    "postcss": "^5.1.2",
+    "serve-favicon": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-flow-strip-types": "^6.14.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-es2016": "^6.11.3",
+    "babel-preset-es2017": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "browser-sync": "^2.16.0",
+    "csswring": "^5.1.0",
+    "flow-bin": "^0.33.0",
+    "gulp": "^3.9.1",
+    "gulp-connect-php": "0.0.8",
+    "gulp-postcss": "^6.1.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-webpack": "^1.5.0",
+    "lost": "^7.1.0",
+    "postcss-cssnext": "^2.8.0",
+    "rucksack-css": "^0.8.6",
+    "webpack": "^1.13.2"
+  }
+}
