@@ -368,3 +368,7 @@ __pycache__/
 
 ### VisualStudio Patch ###
 build/
+
+# Custom
+php/model/db.php
+_raw
