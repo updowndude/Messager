@@ -1,0 +1,4 @@
+name: Message
+dependencies:
+  redux: any
+  bootjack: any

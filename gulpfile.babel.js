@@ -7,11 +7,11 @@ import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
 import csswring from 'csswring';
 import cssnext from 'postcss-cssnext';
-import webpack from 'gulp-webpack';
 import rucksack from 'rucksack-css';
 import browserSync from 'browser-sync';
 import lost from 'lost';
 import connect from 'gulp-connect-php';
+import dart from 'gulp-dart';
 
 browserSync.create();
 
@@ -38,29 +38,15 @@ gulp.task('sass', () => {
     // .pipe(livereload());
 });
 
-// convert new JavaSciprt into older version
-// build out js using babel
-gulp.task('js', () => {
-	return gulp.src('./js/bob.js')
-		.pipe(sourcemaps.init())
-		.pipe(webpack({
-			module: {
-				loaders: [{
-					loader: 'babel-loader',
-					exclude: /node_modules/,
-					query: {
-						presets: ['es2015', 'es2016', 'es2017'],
-						plugins: ['transform-runtime', 'transform-flow-strip-types']
-					}
-				}]
-			},
-			output: {
-				filename: 'my-com.js'
-			}
-		}))
-		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('public/dist'));
-    // .pipe(livereload());
+gulp.task("js", () => {
+  return gulp
+    .src('dart/*.dart')
+    .pipe(dart({
+     'dest': './public/dist',
+     'minify': 'true',
+		 'checked': 'true'
+    }))
+    .pipe(gulp.dest('./'));
 });
 
 // browserSync if chnage
@@ -82,7 +68,7 @@ gulp.task('default', () => {
 
 	// see if there a change
 	gulp.watch('./sass/*.sass', ['sass-watch']);
-	gulp.watch('./js/*.js', ['js-watch']);
+	gulp.watch('./dart/*.dart', ['js-watch']);
 	gulp.watch('./*.php').on('change', () => {
 		browserSync.reload();
 	});
