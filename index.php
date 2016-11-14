@@ -23,6 +23,8 @@
     <?php echo contentIndex(); ?>
   </main>
 <!-- add the recouse for nav click -->
+<!-- dartium -->
 <script src="public/dist/hello.dart.js" type="text/javascript"></script>
+<script type="application/dart" src="dart/hello.dart"></script>
 </body>
 </html>

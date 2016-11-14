@@ -1,4 +1,4 @@
-use cwinkebt_Message;
+use cwinkebt_Messenger;
 
 SELECT *
  from person
