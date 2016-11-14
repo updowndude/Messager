@@ -402,5 +402,6 @@ pubspec.lock
 
 # Custom
 php/model/db.php
+sql/values.sql
 _raw
 .atom
