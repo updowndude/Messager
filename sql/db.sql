@@ -6,6 +6,7 @@ create table person (
 	person_id int auto_increment primary key,
   fname varchar(50) not null,
   lname varchar(50) not null,
+	picture varchar(27),
   birthday date not null
 );
 
@@ -17,10 +18,11 @@ create table groups (
 
 create table poeple_group (
 	poeple_group_id int auto_increment primary key,
-	groups_id int not null,
+	groups_id int,
 	person_id int not null,
 	message varchar(1000),
 	posted DATETIME,
+	video varchar(27),
 
 	constraint fk_people_group_person foreign key (person_id) references person(person_id),
 	constraint fk_people_group_group foreign key (groups_id) references groups(groups_id)

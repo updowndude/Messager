@@ -37,7 +37,7 @@ void checkElements(){
     elmToHome.onClick.listen((evnet) =>
       window.location.assign('groups.php')
     );
-    mainHelper(1, 1, 2, querySelector('#postForm'));
+    mainHelper(1, 1, 3, querySelector('#postForm'));
   }
 }
 
@@ -58,13 +58,12 @@ void inputGroup(var elmParen, var groupsValues) {
 
   for(int lcv=0;lcv<groupsValues.length;lcv++){
     if((strThere == '') || (strThere == null)) {
-      strThere = groupInput.value.trim().toLowerCase() == groupsValues[lcv]['name'].toLowerCase() ? groupsValues[lcv]['name'] : null;
+      strThere = groupInput.value.trim().toLowerCase() == groupsValues[lcv]['name'].toLowerCase() ? groupsValues[lcv]['name'] : '';
     }
   }
-
   groupInput.classes.contains('myError') == true ? groupInput.classes.remove('myError') : null;
 
-  if((groupInput.value.trim() != '') && (strThere == null)) {
+  if((groupInput.value.trim() != '') && (strThere == '')) {
     elmParen.children[2].attributes.remove('disabled');
   } else {
     elmParen.children[2].setAttribute('disabled', 'false');

@@ -6,7 +6,15 @@
 
     return "<div class=\"container\">
       <div class=\"panel panel-info topPanel\">
-        <div class=\"panel-heading\"><p class=\"text-warning\">Welcome</p></div>
+        <div class=\"panel-heading\">
+          <div class=\"container\">
+            <div class=\"row\">
+              <div class=\"col-xs-offset-1\">
+                <p class=\"text-warning\">Welcome</p>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class=\"panel-body\">
           <article style=\"display: none;\">
             {$login}

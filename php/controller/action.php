@@ -1,5 +1,6 @@
 <?php
   require('../model/db.php');
+  require('../view/user.php');
   $action = $_POST['action'];
 
   if ($action == 'done') {
@@ -118,16 +119,48 @@
     $newFeedback = $statement -> fetch();
     $statement->closeCursor();
 
-    $query = 'INSERT INTO poeple_group (groups_id, person_id, message, posted)
-    VALUES (:groups_id, :person_id, :message, :posted)';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':groups_id', $newFeedback['groups_id']);
-    $statement->bindValue(':person_id', $newFeedback['person_id']);
-    $statement->bindValue(':message', $_POST['message']);
-    $statement->bindValue(':posted', date('Y-m-d H:i:s'));
-    $statement->execute();
-    $newFeedback = $statement -> fetch();
-    $statement->closeCursor();
+    if(isset($_FILES['userPostVideo']) == true) {
+      $file = $_FILES['userPostVideo'];
+      $allowedExistion = array('mp4');
+      $fileNameArry = explode('.', $file['name']);
+      $fileName = $file['name'];
+      $curDateTime = date("Y-m-d H:i:s");
+
+      if(($file['size'] <= 20000000) && (end($fileNameArry) == 'mp4') && (strlen($fileName) <= 7) && ($file['error']) == 0) {
+        $fileNewName = "{$fileNameArry[0]}{$curDateTime}.{$fileNameArry[1]}";
+        $query = 'INSERT INTO poeple_group (groups_id, person_id, message, posted, video)
+        VALUES (:groups_id, :person_id, :message, :posted, :file)';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':file', $fileNewName);
+        $statement->bindValue(':groups_id', $newFeedback['groups_id']);
+        $statement->bindValue(':person_id', $newFeedback['person_id']);
+        $statement->bindValue(':message', $_POST['message']);
+        $statement->bindValue(':posted', date('Y-m-d H:i:s'));
+        $statement->execute();
+        $statement->closeCursor();
+        move_uploaded_file($file['tmp_name'], '../../uploads/'.$fileNewName);
+      } else {
+        $query = 'INSERT INTO poeple_group (groups_id, person_id, message, posted)
+        VALUES (:groups_id, :person_id, :message, :posted)';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':groups_id', $newFeedback['groups_id']);
+        $statement->bindValue(':person_id', $newFeedback['person_id']);
+        $statement->bindValue(':message', $_POST['message']);
+        $statement->bindValue(':posted', date('Y-m-d H:i:s'));
+        $statement->execute();
+        $statement->closeCursor();
+      }
+    } else {
+      $query = 'INSERT INTO poeple_group (groups_id, person_id, message, posted)
+      VALUES (:groups_id, :person_id, :message, :posted)';
+      $statement = $db->prepare($query);
+      $statement->bindValue(':groups_id', $newFeedback['groups_id']);
+      $statement->bindValue(':person_id', $newFeedback['person_id']);
+      $statement->bindValue(':message', $_POST['message']);
+      $statement->bindValue(':posted', date('Y-m-d H:i:s'));
+      $statement->execute();
+      $statement->closeCursor();
+    }
 
     header('Location: ../view/posts.php');
   } else if ($action == 'logOut') {
@@ -204,7 +237,25 @@
 
     header('Location: ../view/groups.php');
   } else if($action == 'delateGroup') {
+    $query = 'SELECT video FROM poeple_group WHERE groups_id = :gID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':gID', $_POST['groupID']);
+    $statement->execute();
+    $newFeedback = $statement -> fetchAll();
+    $statement->closeCursor();
+
+    foreach($newFeedback as $curFeedback) {
+      if($curFeedback['video'] != null) {
+        unlink('../../uploads/'.$curFeedback['video']);
+      }
+    }
     $query = 'DELETE FROM poeple_group WHERE groups_id = :gID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':gID', $_POST['groupID']);
+    $statement->execute();
+    $statement->closeCursor();
+
+    $query = 'DELETE FROM feedback WHERE groups_id = :gID';
     $statement = $db->prepare($query);
     $statement->bindValue(':gID', $_POST['groupID']);
     $statement->execute();
@@ -218,6 +269,15 @@
 
     header('Location: ../view/groups.php');
   } else if($action == 'delatePost') {
+    $query = 'SELECT * FROM poeple_group WHERE ((message = :messagePG) && (posted = :postedPG))';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':postedPG', $_POST['postedPG']);
+    $statement->bindValue(':messagePG', $_POST['messagePG']);
+    $statement->execute();
+    $newFeedback = $statement -> fetch();
+    $statement->closeCursor();
+    unlink('../../uploads/'.$newFeedback['video']);
+
     $query = 'DELETE FROM poeple_group WHERE ((message = :messagePG) && (posted = :postedPG))';
     $statement = $db->prepare($query);
     $statement->bindValue(':postedPG', $_POST['postedPG']);
@@ -226,5 +286,44 @@
     $statement->closeCursor();
 
     header('Location: ../view/posts.php');
+  } else if($action == 'uploadUserImg') {
+    if(isset($_FILES['userNewImage']) == true) {
+      $file = $_FILES['userNewImage'];
+      $allowedExistion = array('jpg', 'png');
+      $fileNameArry = explode('.', $file['name']);
+      $fileName = $file['name'];
+      $curDateTime = date("Y-m-d H:i:s");
+
+      if(($file['size'] <= 10000000) && (in_array(end($fileNameArry), $allowedExistion)) && (strlen($fileName) <= 7) && ($file['error']) == 0) {
+        $fileNewName = "{$fileNameArry[0]}{$curDateTime}.{$fileNameArry[1]}";
+        $query = 'SELECT * from person
+         where ((fname = :fname) && (lname = :lname) && (birthday = :birthday))';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':file', $fileNewName);
+        $statement->bindValue(':fname', $_COOKIE['fName']);
+        $statement->bindValue(':lname', $_COOKIE['lName']);
+        $statement->bindValue(':birthday', $_COOKIE['bDate']);
+        $statement->execute();
+        $newFeedback = $statement -> fetch();
+        $statement->closeCursor();
+        if($newFeedback['video'] != null) {
+          unlink('../../uploads/'.$newFeedback['video']);
+        }
+
+        $query = 'UPDATE person
+          set picture = :file
+         where ((fname = :fname) && (lname = :lname) && (birthday = :birthday))';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':file', $fileNewName);
+        $statement->bindValue(':fname', $_COOKIE['fName']);
+        $statement->bindValue(':lname', $_COOKIE['lName']);
+        $statement->bindValue(':birthday', $_COOKIE['bDate']);
+        $statement->execute();
+        $statement->closeCursor();
+
+        move_uploaded_file($file['tmp_name'], '../../uploads/'.$fileNewName);
+      }
+    }
+    header('Location: ../view/groups.php');
   }
 ?>

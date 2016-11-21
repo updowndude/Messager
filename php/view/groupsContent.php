@@ -20,7 +20,7 @@
               <form action=\"../controller/action.php\" method=\"post\">
                 <input type=\"hidden\" type=\"text\" name=\"action\" value=\"seeWhoPosts\">
                 <input class=\"searchMe\" type=\"hidden\" type=\"text\" value=\"{$curName}\" name=\"whoPost\">
-                <button type=\"submit\" class=\"btn btn-default\">{$curName}</button>
+                <button type=\"submit\" class=\"btn btn-default\"><strong>{$curName}</strong></button>
               </form>
               <form action=\"../controller/action.php\" method=\"post\">
                 <input type=\"hidden\" type=\"text\" name=\"action\" value=\"delateGroup\">
@@ -65,7 +65,7 @@
           <form action=\"../controller/action.php\" method=\"post\">
             <input type=\"hidden\" type=\"text\" name=\"action\" value=\"seeWhoPosts\">
             <input class=\"searchMe\" type=\"hidden\" type=\"text\" value=\"{$curName}\" name=\"whoPost\">
-            <button type=\"submit\" class=\"btn btn-default\">{$curName}</button>
+            <button type=\"submit\" class=\"btn btn-default\"><strong>{$curName}</strong></button>
           </form>
         </div>
       ";
@@ -205,7 +205,7 @@
           <label for=\"Name\">Name</label>
           <input type=\"text\" class=\"form-control\" name=\"Name\">
         </div>
-        <button type=\"submit\" class=\"btn btn-default\" disabled>Submit</button>
+        <button type=\"submit\" class=\"btn btn-default\" disabled>Add</button>
       </form>
     ";
   }

@@ -6,6 +6,8 @@
   require_once('feedback.php');
   require_once('groupsContent.php');
   require_once('buildJson.php');
+  require_once('carousel.php');
+  require('user.php');
 
   function mainPage() {
     builder();
@@ -17,25 +19,43 @@
     $groups = groupData();
     $groupForm = groupForm();
     $groupUserForm = groupUserForm();
+    $curUser = userPanel();
+    $curUserImage = userImageSrc();
+    $carousel = buildCarousel();
     $User = $_COOKIE['fName'].' '.$_COOKIE['lName'];
 
     return "
       {$head}
       <ul id=\"tabs\" class=\"nav nav-tabs\">
         <li role=\"presentation\" class=\"active\">
-          <a data-toggle=\"tab\" href=\"#groupsMenu\">Groups</a>
+          <a data-toggle=\"tab\" href=\"#groupsMenu\">
+          <u>Groups</u>
+          </a>
         </li>
         <li role=\"presentation\">
-          <a data-toggle=\"tab\" href=\"#aboutMenu\">About</a>
+          <a data-toggle=\"tab\" href=\"#aboutMenu\">
+            <u>About</u>
+          </a>
         </li>
         <li role=\"presentation\">
-          <a data-toggle=\"tab\" href=\"#feedbackMenu\">Feedback</a>
+          <a data-toggle=\"tab\" href=\"#feedbackMenu\">
+            <u>Feedback</u>
+          </a>
         </li>
         <li role=\"presentation\">
-          <a data-toggle=\"tab\" href=\"#adimMenu\">Administrator</a>
+          <a data-toggle=\"tab\" href=\"#adimMenu\">
+            <abbr title=\"Administrator\">Admin</abbr>
+          </a>
+        </li>
+        <li role=\"presentation\">
+          <a data-toggle=\"tab\" href=\"#Carousel\">
+            <u>Carousel</u>
+          </a>
         </li>
         <li role=\"presentation\" class=\"pull-right\">
-          <a data-toggle=\"tab\" href=\"#\">{$User}</a>
+          <a data-toggle=\"tab\" href=\"#userMenu\">
+            <img src=\"{$curUserImage}\" alt=\"user\" class=\"curUserImage\"> <u>{$User}</u>
+          </a>
         </li>
       </ul>
 
@@ -45,6 +65,8 @@
           {$about}
           {$feedback}
           {$adim}
+          {$curUser}
+          {$carousel}
         </div>
       </div>
 
@@ -92,6 +114,8 @@
       </div>
     </div>
   </div>
+  <!-- bootjack not done implementing Carousel -->
+  <script type=\"text/javascript\" src=\"../../public/dist/carousel-native.js\"></script>
       {$footer}
     ";
   }

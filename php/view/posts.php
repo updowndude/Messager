@@ -20,6 +20,7 @@
 
   function buildPosts() {
     require('../model/db.php');
+    require('user.php');
 
     $strPosts = "";
 
@@ -32,16 +33,35 @@
     $statement->execute();
     $aGroups = $statement -> fetchAll();
     $statement->closeCursor();
+    $curUserImage = userImageSrc();
 
     foreach($aGroups as $aGroup) {
       $adimDelete = adimDelete($aGroup['message'], $aGroup['posted']);
       $fulName = $aGroup['fname'].' '.$aGroup['lname'];
 
       if (($aGroup['posted'] != '') && ($aGroup['message'] != '')) {
+        if($aGroup['video'] != null) {
+          $video = "
+            <div align=\"center\" class=\"embed-responsive embed-responsive-16by9\">
+              <video autoplay loop class=\"embed-responsive-item\" controls>
+                  <source src=\"../../uploads/{$aGroup['video']}\" type=\"video/mp4\">
+              </video>
+            </div>
+          ";
+        } else {
+          $video = null;
+        }
+
         $strPosts = $strPosts."
           <div class=\"panel panel-default\">
-            <div class=\"panel-heading\">{$fulName}</div>
-            <div class=\"panel-body\">{$aGroup['message']}{$adimDelete}</div>
+            <div class=\"panel-heading\">
+              <img src=\"{$curUserImage}\" alt=\"user\" class=\"curUserImage\"> {$fulName}
+            </div>
+            <div class=\"panel-body\">
+              <p>{$aGroup['message']}</p>
+              {$video}
+              {$adimDelete}
+            </div>
             <div class=\"panel-footer\">{$aGroup['posted']}</div>
           </div>
         ";
@@ -83,11 +103,16 @@
         <div class=\"panel panel-default\">
           <div class=\"panel-heading\">Add a new post</div>
           <div class=\"panel-body\">
-            <form id=\"postForm\" action=\"../controller/action.php\" method=\"post\">
+            <form id=\"postForm\" action=\"../controller/action.php\" method=\"post\" enctype=\"multipart/form-data\">
               <input type=\"hidden\" type=\"text\" name=\"action\" value=\"addPost\">
               <div class=\"form-group\">
                 <label for=\"message\">Message</label>
                 <textarea class=\"form-control\" rows=\"5\" name=\"message\"></textarea>
+              </div>
+              <div class=\"form-group\">
+                <label class=\"btn btn-default btn-file\">
+                  Upload Video <input name=\"userPostVideo\" type=\"file\" style=\"display: none;\">
+                </label>
               </div>
               <button type=\"submit\" class=\"btn btn-default\" disabled>Submit</button>
             </form>
@@ -132,7 +157,7 @@
             <div class=\"panel panel-default\">
               <div class=\"panel-heading\">Sorry</div>
               <div class=\"panel-body\">
-                <h3>Sorry administrator, you need to add yourself to the group.</h3>
+                <h3>Sorry <abbr title=\"Administrator\">Admin</abbr>, you need to add yourself to the group.</h3>
               </div>
             </div>
           </div>";
@@ -153,7 +178,7 @@
         return "
           <li role=\"presentation\">
             <a data-toggle=\"tab\" href=\"#adimData\">
-              Administrator
+              <abbr title=\"Administrator\">Admin</abbr>
             </a>
           </li>
         ";
@@ -170,7 +195,7 @@
 
     $data = "";
 
-    $query = "SELECT DATE(poeple_group.posted) as dbDate, CONCAT(person.fname,' ', person.lname, ' ',person.birthday) as fullPerson
+    $query = "SELECT DATE(poeple_group.posted) as dbDate, CONCAT(person.fname,' ', person.lname) as fullPerson, person.birthday
       from  (person inner join poeple_group on person.person_id = poeple_group.person_id) join groups on groups.groups_id = poeple_group.groups_id
       where ((message IS NULL) && (groups.name = :name))
     ";
@@ -187,10 +212,11 @@
       $howLong = $daysDiff->days;
 
       $data = $data."
-        <ol>
-          <li>Name: {$aGroup['fullPerson']}</li>
-          <li>Number of days: {$howLong}</li>
-        </ol>
+        <tr class=\"success\">
+          <td><mark>{$aGroup['fullPerson']}</mark></td>
+          <td>{$aGroup['birthday']}</td>
+          <td>{$howLong}</td>
+        </tr>
       ";
     }
 
@@ -199,9 +225,23 @@
         return "
           <div id=\"adimData\" class=\"tab-pane fade\">
             <div class=\"panel panel-default\">
-              <div class=\"panel-heading\">Administrator data</div>
+              <div class=\"panel-heading\"><abbr title=\"Administrator\">Admin</abbr> data</div>
               <div class=\"panel-body\">
-                {$data}
+                <div class=\"table-responsive\">
+                 <table class=\"table table-hover\">
+                   <thead>
+                     <tr>
+                       <th>Name</th>
+                       <th>Brithday</th>
+                       <th>Number of days:</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                    {$data}
+                   </tbody>
+                 </table>
+               </div>
+
               </div>
             </div>
           </div>
@@ -212,6 +252,19 @@
     } else {
       return "";
     }
+  }
+
+  function groupInfo() {
+    return "
+      <div id=\"groupInfo\" class=\"tab-pane fade\">
+        <div class=\"panel panel-default\">
+          <div class=\"panel-heading\">Group data</div>
+          <div class=\"panel-body\">
+            Name of group: {$_COOKIE['name']}
+          </div>
+        </div>
+      </div>
+      ";
   }
 
   function master() {
@@ -225,6 +278,7 @@
     $postForm = makeForm();
     $adimDataTab = adimDataTab();
     $adimData = adimData();
+    $groupInfo = groupInfo();
 
     return "
       {$head}
@@ -236,7 +290,7 @@
         </li>
         <li role=\"presentation\" class=\"active\">
           <a data-toggle=\"tab\" href=\"#groups\">
-            Groups
+            <u>Groups</u>
           </a>
         </li>
         <li role=\"presentation\">
@@ -246,7 +300,8 @@
         </li>
         <li role=\"presentation\" class=\"dropdown\">
           <a data-toggle=\"dropdown\" role=\"buttom\" class=\"dropdown-toggle\" href=\"#\">
-            Members<span class=\"caret\"></span>
+            <u>Members</u>
+            <span class=\"caret\"></span>
           </a>
           <ul role=\"menu\" class=\"dropdown-menu\">
             {$members}
@@ -254,7 +309,9 @@
         </li>
         {$adimDataTab}
         <li role=\"presentation\" class=\"pull-right\">
-          <a data-toggle=\"tab\" href=\"#\">{$_COOKIE['name']}</a>
+          <a data-toggle=\"tab\" href=\"#groupInfo\">
+            <u>{$_COOKIE['name']}</u>
+          </a>
         </li>
       </ul>
 
@@ -264,6 +321,7 @@
           {$posts}
         </div>
         {$adimData}
+        {$groupInfo}
       </div>
       {$footer}
     ";

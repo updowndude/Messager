@@ -7,7 +7,7 @@ The code in this repository for my classes at Black Tech and for fall sixteen se
 To start the project Gulp
 
 ## * dependencies
-     1. Node JS
+    1. Node JS
 
 ### testing purposes
 path /Applications/MAMP/htdocs/Messager
