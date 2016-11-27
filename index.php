@@ -1,4 +1,7 @@
-<?php require_once('php/view/indexPlaceholder.php') ?>
+<?php
+  require_once('php/view/indexPlaceholder.php');
+  require('php/controller/defense.php');
+?>
 <!doctype html>
 <html lang="en">
 <head>

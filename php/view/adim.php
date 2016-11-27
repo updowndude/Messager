@@ -14,17 +14,30 @@
     require('../model/db.php');
 
     $toGroups = "";
+    $cnt = 2;
 
     $query = "SELECT CONCAT(person.fname,' ', person.lname) as fullPerson, person.birthday ,feedback.message, feedback.rating, groups.name, feedback.placed
         from (person INNER JOIN feedback on person.person_id = feedback.person_id) LEFT JOIN groups on groups.groups_id = feedback.groups_id";
     $statement = $db->prepare($query);
-    $statement->execute();
+    if (!$statement) {
+      exit("Sorry prepare failed");
+    }
+    $workQuery = $statement->execute();
+    if(!$workQuery) {
+      exit("Bad execcution");
+    }
     $newFeedback = $statement -> fetchAll();
     $statement->closeCursor();
 
     foreach($newFeedback as $curFeedback) {
+      if($cnt % 2 == 0) {
+        $row = "info";
+      } else {
+        $row = "danger";
+      }
+
       $toGroups = $toGroups."
-       <tr class=\"success\">
+       <tr class=\"{$row}\">
          <td><mark>{$curFeedback['fullPerson']}</mark></td>
          <td>{$curFeedback['birthday']}</td>
          <td>{$curFeedback['message']}</td>
@@ -33,6 +46,8 @@
          <td>{$curFeedback['placed']}</td>
        </tr>
       ";
+
+      $cnt++;
     }
 
     return "
@@ -42,12 +57,14 @@
   }
 
   function adimData() {
+    // require('../controller/defense.php');
+    $token = makeToken();
     $access = getAccess();
     $data = getData();
     $panelData = "";
 
-    if(isset($_COOKIE['adim']) == true) {
-      if($_COOKIE['adim'] == 'cVU7k1hstJ') {
+    if(isset($_SESSION['adim']) == true) {
+      if($_SESSION['adim'] == 'cVU7k1hstJ') {
         $panelData = "
           {$access}
           <hr />
@@ -77,7 +94,8 @@
               <label for=\"selectGroupFeedback\"><abbr title=\"Administrator\">Admin</abbr> Key</label>
               <input class=\"adimSearch\" type=\"text\" type=\"text\" name=\"adimString\">
             </div>
-            <button type=\"submit\" class=\"btn btn-default\">Submit</button>
+            {$token}
+            <button type=\"submit\" class=\"btn btn-info\">Submit</button>
           </form>
         ";
       }
@@ -89,15 +107,18 @@
             <label for=\"selectGroupFeedback\"><abbr title=\"Administrator\">Admin</abbr> Key</label>
             <input class=\"adimSearch\" type=\"text\" type=\"text\" name=\"adimString\">
           </div>
-          <button type=\"submit\" class=\"btn btn-default\">Submit</button>
+          {$token}
+          <button type=\"submit\" class=\"btn btn-info\">Submit</button>
         </form>
       ";
     }
 
     $values = "
       <div id=\"adimMenu\" class=\"tab-pane fade\">
-        <div class=\"panel panel-default\">
-          <div class=\"panel-heading\">Adim</div>
+        <div class=\"panel panel-info\">
+          <div class=\"panel-heading\">
+            <p class=\"text-warning\">Adim</p>
+          </div>
           <div class=\"panel-body\">
             {$panelData}
           </div>

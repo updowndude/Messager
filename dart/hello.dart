@@ -23,7 +23,7 @@ void checkElements(){
   if(aryGroupAdd != null) {
     HttpRequest.getString("../../json/groups.json").then((data) => groupsValues = JSON.decode(data));
     aryGroupAdd.children[1].children[1].onInput.listen((event) => inputGroup(aryGroupAdd, groupsValues));
-    mainHelper(3, 1, 4, elmFeedback);
+    mainHelper(3, 1, 5, elmFeedback);
   } else if(btnIndex != null) {
    btnIndex.children.forEach((cur) =>
      cur.onClick.listen((event) => changeME(cur, btnIndex))
@@ -32,12 +32,11 @@ void checkElements(){
    aryInputLogin.forEach((cur) =>
      cur.onInput.listen((event) => inputChanger(cur, aryInputLogin))
    );
-
   } else if(elmToHome != null) {
     elmToHome.onClick.listen((evnet) =>
       window.location.assign('groups.php')
     );
-    mainHelper(1, 1, 3, querySelector('#postForm'));
+    mainHelper(1, 1, 4, querySelector('#postForm'));
   }
 }
 
@@ -64,9 +63,9 @@ void inputGroup(var elmParen, var groupsValues) {
   groupInput.classes.contains('myError') == true ? groupInput.classes.remove('myError') : null;
 
   if((groupInput.value.trim() != '') && (strThere == '')) {
-    elmParen.children[2].attributes.remove('disabled');
+    elmParen.children[3].attributes.remove('disabled');
   } else {
-    elmParen.children[2].setAttribute('disabled', 'false');
+    elmParen.children[3].setAttribute('disabled', 'false');
     groupInput.classes.add('myError');
   }
 }
@@ -95,7 +94,7 @@ void inputChanger(var cur, ElementList aryIndexFormInputs) {
     }
   });
 
-  if (intCountSumbitTurnOn == 5) {
+  if (intCountSumbitTurnOn == 6) {
     elmSumbit.attributes.remove('disabled');
   } else if (elmSumbit.classes.contains('disabled') == false)  {
     elmSumbit.setAttribute('disabled', 'false');

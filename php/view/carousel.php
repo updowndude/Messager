@@ -2,8 +2,10 @@
   function buildCarousel() {
     $userImagesrc = userImageSrc();
     return "   <div id=\"Carousel\" class=\"tab-pane fade\">
-        <div class=\"panel panel-default\">
-          <div class=\"panel-heading\">Carousel</div>
+        <div class=\"panel panel-info\">
+          <div class=\"panel-heading\">
+            <p class=\"text-warning\">Carousel</p>
+          </div>
           <div class=\"panel-body\">
             <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">
               <ol class=\"carousel-indicators\">

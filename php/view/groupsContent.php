@@ -1,34 +1,51 @@
 <?php
   function groupsDisplay() {
     require('../model/db.php');
-
+    // require('../controller/defense.php');
+    $token = makeToken();
     $data = "";
+    $cnt = 2;
 
-    if(isset($_COOKIE['adim']) == true) {
-      if($_COOKIE['adim'] == 'cVU7k1hstJ') {
+    if(isset($_SESSION['adim']) == true) {
+      if($_SESSION['adim'] == 'cVU7k1hstJ') {
         $query = "select * from groups";
         $statement = $db->prepare($query);
-        $statement->execute();
+        if (!$statement) {
+          exit("Sorry prepare failed");
+        }
+        $workQuery = $statement->execute();
+        if(!$workQuery) {
+          exit("Bad execcution");
+        }
         $newFeedback = $statement -> fetchAll();
         $statement->closeCursor();
 
         foreach($newFeedback as $curFeedback) {
           $curName = $curFeedback['name'];
 
+          if($cnt % 2 == 0) {
+            $row = "info";
+          } else {
+            $row = "danger";
+          }
+
           $data = $data."
-            <div class=\"well personGroups\">
+            <div class=\"well personGroups {$row}\">
               <form action=\"../controller/action.php\" method=\"post\">
                 <input type=\"hidden\" type=\"text\" name=\"action\" value=\"seeWhoPosts\">
                 <input class=\"searchMe\" type=\"hidden\" type=\"text\" value=\"{$curName}\" name=\"whoPost\">
-                <button type=\"submit\" class=\"btn btn-default\"><strong>{$curName}</strong></button>
+                {$token}
+                <button type=\"submit\" class=\"btn btn-{$row}\"><strong>{$curName}</strong></button>
               </form>
               <form action=\"../controller/action.php\" method=\"post\">
                 <input type=\"hidden\" type=\"text\" name=\"action\" value=\"delateGroup\">
                 <input type=\"hidden\" type=\"text\" name=\"groupID\" value=\"{$curFeedback['groups_id']}\">
-                <button type=\"submit\" class=\"btn btn-default\">Delete</button>
+                {$token}
+                <button type=\"submit\" class=\"btn btn-{$row}\">Delete</button>
               </form>
             </div>
           ";
+          $cnt++;
         }
       } else {
         $data = groupDisplayHelper();
@@ -41,8 +58,10 @@
 
   function groupDisplayHelper() {
     require('../model/db.php');
-
+    // require('../controller/defense.php');
+    $token = makeToken();
     $strText = "";
+    $cnt = 2;
 
     $query = "select *
       from (person inner join poeple_group on person.person_id = poeple_group.person_id)
@@ -50,25 +69,48 @@
       where ((fname = :fName) && (lname = :lName) && (birthday = :bDate))
       GROUP BY poeple_group.groups_id";
     $statement = $db->prepare($query);
-    $statement->bindValue(':fName', $_COOKIE['fName']);
-    $statement->bindValue(':lName', $_COOKIE['lName']);
-    $statement->bindValue(':bDate', $_COOKIE['bDate']);
-    $statement->execute();
+    if (!$statement) {
+      exit("Sorry prepare failed");
+    }
+    $bind_results = $statement->bindValue(':fName', $_SESSION['fName']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $bind_results = $statement->bindValue(':lName', $_SESSION['lName']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $bind_results = $statement->bindValue(':bDate', $_SESSION['bDate']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $workQuery = $statement->execute();
+    if(!$workQuery) {
+      exit("Bad execcution");
+    }
     $newFeedback = $statement -> fetchAll();
     $statement->closeCursor();
 
     foreach($newFeedback as $curFeedback) {
       $curName = $curFeedback['name'];
 
+      if($cnt % 2 == 0) {
+        $row = "info";
+      } else {
+        $row = "danger";
+      }
+
       $strText = $strText."
-        <div class=\"well personGroups\">
+        <div class=\"well personGroups {$row}\">
           <form action=\"../controller/action.php\" method=\"post\">
             <input type=\"hidden\" type=\"text\" name=\"action\" value=\"seeWhoPosts\">
             <input class=\"searchMe\" type=\"hidden\" type=\"text\" value=\"{$curName}\" name=\"whoPost\">
-            <button type=\"submit\" class=\"btn btn-default\"><strong>{$curName}</strong></button>
+            {$token}
+            <button type=\"submit\" class=\"btn btn-{$row}\"><strong>{$curName}</strong></button>
           </form>
         </div>
       ";
+      $cnt++;
     }
 
     return $strText;
@@ -95,10 +137,25 @@
       where ((fname = :fName) && (lname = :lName) && (birthday = :bDate))
       GROUP BY poeple_group.groups_id";
     $statement = $db->prepare($query);
-    $statement->bindValue(':fName', $_COOKIE['fName']);
-    $statement->bindValue(':lName', $_COOKIE['lName']);
-    $statement->bindValue(':bDate', $_COOKIE['bDate']);
-    $statement->execute();
+    if (!$statement) {
+      exit("Sorry prepare failed");
+    }
+    $bind_results = $statement->bindValue(':fName', $_SESSION['fName']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $bind_results = $statement->bindValue(':lName', $_SESSION['lName']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $bind_results = $statement->bindValue(':bDate', $_SESSION['bDate']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $workQuery = $statement->execute();
+    if(!$workQuery) {
+      exit("Bad execcution");
+    }
     $newFeedback = $statement -> fetchAll();
     $statement->closeCursor();
 
@@ -118,12 +175,18 @@
 
     $query = "select * from person";
     $statement = $db->prepare($query);
-    $statement->execute();
+    if (!$statement) {
+      exit("Sorry prepare failed");
+    }
+    $workQuery = $statement->execute();
+    if(!$workQuery) {
+      exit("Bad execcution");
+    }
     $newFeedback = $statement -> fetchAll();
     $statement->closeCursor();
 
     foreach($newFeedback as $curFeedback) {
-      if (($curFeedback['fname'] !=  $_COOKIE['fName']) || ($curFeedback['lname'] !=  $_COOKIE['lName']) || ($curFeedback['birthday'] !=  $_COOKIE['bDate'])) {
+      if (($curFeedback['fname'] !=  $_SESSION['fName']) || ($curFeedback['lname'] !=  $_SESSION['lName']) || ($curFeedback['birthday'] !=  $_SESSION['bDate'])) {
         $curFullName = $curFeedback['fname'].' '.$curFeedback['lname'];
 
         $users = $users."
@@ -135,12 +198,13 @@
 
   function groupUserForm() {
     require('../model/db.php');
-
+    // require('../controller/defense.php');
+    $token = makeToken();
     $users = "";
     $toGroups = "";
 
-    if(isset($_COOKIE['adim']) == true) {
-      if($_COOKIE['adim'] == 'cVU7k1hstJ') {
+    if(isset($_SESSION['adim']) == true) {
+      if($_SESSION['adim'] == 'cVU7k1hstJ') {
         $query = "select * from groups";
         $statement = $db->prepare($query);
         $statement->execute();
@@ -192,12 +256,16 @@
             {$toGroups}
           </select>
         </div>
-        <button type=\"submit\" class=\"btn btn-default\">Add</button>
+        {$token}
+        <button type=\"submit\" class=\"btn btn-info\">Add</button>
       </form>
     ";
   }
 
   function groupForm() {
+    // require('../controller/defense.php');
+    $token = makeToken();
+
     return "
       <form id=\"groupForm\" action=\"../controller/action.php\" method=\"post\">
         <input type=\"hidden\" type=\"text\" name=\"action\" value=\"addGroup\">
@@ -205,7 +273,8 @@
           <label for=\"Name\">Name</label>
           <input type=\"text\" class=\"form-control\" name=\"Name\">
         </div>
-        <button type=\"submit\" class=\"btn btn-default\" disabled>Add</button>
+        {$token}
+        <button type=\"submit\" class=\"btn btn-info\" disabled>Add</button>
       </form>
     ";
   }

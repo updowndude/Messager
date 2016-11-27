@@ -5776,7 +5776,13 @@ button.close {
 
 body {
   background-image: url("../images/ys.jpg");
-  background-size: cover; }
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  margin: 0; }
+
+html {
+  background-color: #75caeb; }
 
 .navbar {
   border-width: 0 1px 4px 1px; }
@@ -6149,27 +6155,45 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 .popover {
   color: #333333; }
 
-.panel .jumbotron {
-  background-color: #75caeb; }
-  .panel .jumbotron h1, .panel .jumbotron p {
-    color: #fff; }
-  .panel .jumbotron .media-object {
-    width: 200px;
-    width: 20rem;
-    height: 200px;
-    height: 20rem; }
+.panel, .well {
+  opacity: 0.9;
+  box-shadow: 1px 5px 1px rgba(0, 0, 0, 0.1), 1px -5px 1px rgba(0, 0, 0, 0.1); }
+  .panel .jumbotron, .well .jumbotron {
+    background-color: #75caeb;
+    margin-bottom: -1.5px;
+    margin-bottom: -0.15rem; }
+    .panel .jumbotron h1, .panel .jumbotron p, .well .jumbotron h1, .well .jumbotron p {
+      color: #fff; }
+    .panel .jumbotron .media-object, .well .jumbotron .media-object {
+      width: 200px;
+      width: 20rem;
+      height: 200px;
+      height: 20rem; }
+  .panel .panel-body, .well .panel-body {
+    background-color: #32b0e1; }
+    .panel .panel-body label, .panel .panel-body button, .panel .panel-body p, .panel .panel-body th, .panel .panel-body li, .panel .panel-body h3, .well .panel-body label, .well .panel-body button, .well .panel-body p, .well .panel-body th, .well .panel-body li, .well .panel-body h3 {
+      color: #fff; }
+    .panel .panel-body td, .well .panel-body td {
+      color: #777; }
+  .panel .panel-footer, .well .panel-footer {
+    background-color: #b8e4f5; }
+  .panel .text-warning, .well .text-warning {
+    font-size: 20px;
+    font-size: 2rem;
+    margin-bottom: -5px;
+    margin-bottom: -0.5rem; }
 
-.panel .panel-body {
+.modal-content .modal-header {
+  background-color: #75caeb; }
+
+.modal-content .modal-body {
   background-color: #32b0e1; }
 
-.panel .panel-footer {
-  background-color: #D9EDF7; }
+.panel-danger .panel-body {
+  background-color: #e90d00; }
 
-.panel .text-warning {
-  font-size: 20px;
-  font-size: 2rem;
-  margin-bottom: -5px;
-  margin-bottom: -0.5rem; }
+.panel-danger .panel-footer {
+  background-color: #ff8983; }
 
 .topPanel {
   margin-top: 10px;
@@ -6181,6 +6205,26 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
   height: 30rem;
   max-height: 300px;
   max-height: 30rem; }
+
+.well.info, .well {
+  background-color: #1c95c4; }
+
+.well.danger {
+  background-color: #b60a00; }
+
+#tabs .active a {
+  background-color: #8bd3ee; }
+
+#tabs li a {
+  color: #fff;
+  background-color: #32b0e1; }
+
+#tabs .dropdown-menu {
+  background-color: #32b0e1; }
+
+.tab-content > div {
+  margin-top: 10px;
+  margin-top: 1rem; }
 
 .movers {
   position: fixed;
@@ -6204,7 +6248,7 @@ footer {
   bottom: 0;
   width: 100%;
   font: 1.2em 'PT Serif', serif;
-  background-color: rgba(204, 86, 86, 0.3);
+  background-color: rgba(117, 202, 235, 0.3);
   letter-spacing: 1.2em;
   color: #D1F8A1; }
   footer p {
@@ -6239,3 +6283,11 @@ footer {
   width: 2rem;
   height: 20px;
   height: 2rem; }
+
+#adimMenu > div > div.panel-body > hr {
+  margin-bottom: -1px;
+  margin-bottom: -0.1rem; }
+
+#myBody > main > div:nth-child(3) > div, #groups > div:last-child {
+  margin-bottom: 50px;
+  margin-bottom: 5rem; }

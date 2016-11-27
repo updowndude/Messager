@@ -14,7 +14,7 @@
       <meta name=\"language\" content=\"english\">
       <meta name=\"description\" content=\"Bootstrap assigments\">
       <meta name=\"abstract\" content=\"Main page\">
-      <meta http-equiv=\"refresh\" content=\"30\"> 
+      <!-- <meta http-equiv=\"refresh\" content=\"30\"> -->
       <!-- mobile friendly -->
       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
       <!-- links to rescoures -->

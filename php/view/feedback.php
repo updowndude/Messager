@@ -1,7 +1,8 @@
 <?php
   function feedbackData() {
+    // require('../controller/defense.php');
     require('../model/db.php');
-
+    $token = makeToken();
     $toGroups = "<option value=\"-1\"> </option>";
     $toRating = "";
     $lcver = "";
@@ -12,10 +13,25 @@
       where ((fname = :fName) && (lname = :lName) && (birthday = :bDate))
       GROUP BY poeple_group.groups_id";
     $statement = $db->prepare($query);
-    $statement->bindValue(':fName', $_COOKIE['fName']);
-    $statement->bindValue(':lName', $_COOKIE['lName']);
-    $statement->bindValue(':bDate', $_COOKIE['bDate']);
-    $statement->execute();
+    if (!$statement) {
+      exit("Sorry prepare failed");
+    }
+    $bind_results = $statement->bindValue(':fName', $_SESSION['fName']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $bind_results = $statement->bindValue(':lName', $_SESSION['lName']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $bind_results = $statement->bindValue(':bDate', $_SESSION['bDate']);
+    if(!$bind_results) {
+      exit("Sorry can't bind those value");
+    }
+    $workQuery = $statement->execute();
+    if(!$workQuery) {
+      exit("Bad execcution");
+    }
     $newFeedback = $statement -> fetchAll();
     $statement->closeCursor();
 
@@ -53,8 +69,10 @@
 
     return "
       <div id=\"feedbackMenu\" class=\"tab-pane fade container\">
-        <div class=\"panel panel-default\">
-          <div class=\"panel-heading\">About Project</div>
+        <div class=\"panel panel-info\">
+          <div class=\"panel-heading\">
+            <p class=\"text-warning\">Feedback</p>
+          </div>
           <div class=\"panel-body\">
             <form id=\"feedBack\" action=\"../controller/action.php\" method=\"post\">
               <input type=\"hidden\" type=\"text\" name=\"action\" value=\"giveFeedback\">
@@ -74,7 +92,8 @@
                 <label for=\"txtMessage\">Message</label>
                 <textarea class=\"form-control\" rows=\"5\" name=\"txtMessage\"></textarea>
               </div>
-              <button type=\"submit\" class=\"btn btn-default\" disabled>Submit</button>
+              {$token}
+              <button type=\"submit\" class=\"btn btn-info\" disabled>Submit</button>
             </form>
           </div>
         </div>

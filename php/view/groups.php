@@ -10,6 +10,8 @@
   require('user.php');
 
   function mainPage() {
+    require('../controller/defense.php');
+    $token = makeToken();
     builder();
     $head = headData("Groups");
     $footer = footerData();
@@ -22,14 +24,15 @@
     $curUser = userPanel();
     $curUserImage = userImageSrc();
     $carousel = buildCarousel();
-    $User = $_COOKIE['fName'].' '.$_COOKIE['lName'];
+    $User = $_SESSION['fName'].' '.$_SESSION['lName'];
+    $expireTime = $_SESSION['loginTime'] + 18000;
 
-    return "
+    $page = "
       {$head}
       <ul id=\"tabs\" class=\"nav nav-tabs\">
         <li role=\"presentation\" class=\"active\">
           <a data-toggle=\"tab\" href=\"#groupsMenu\">
-          <u>Groups</u>
+            <u>Groups</u>
           </a>
         </li>
         <li role=\"presentation\">
@@ -72,16 +75,25 @@
 
     <div class=\"container\">
       <div class=\"well\">
-        <form action=\"../controller/action.php\" method=\"post\">
-          <input type=\"hidden\" type=\"text\" name=\"action\" value=\"logOut\">
-          <button type=\"submit\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-log-out\"></span></button>
-        </form>
-        <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#addUsers\">
-          <span class=\"glyphicon glyphicon-user\"></span>
-        </button>
-        <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#myModal\">
-          <span class=\"glyphicon glyphicon-plus-sign\"></span>
-        </button>
+        <div class=\"row\">
+          <div class=\"col-xs-2 col-sm-1\">
+            <form action=\"../controller/action.php\" method=\"post\">
+              <input type=\"hidden\" type=\"text\" name=\"action\" value=\"logOut\">
+              <button type=\"submit\" class=\"btn btn-info\"><span class=\"glyphicon glyphicon-log-out\"></span></button>
+              {$token}
+            </form>
+          </div>
+          <div class=\"col-xs-2 col-sm-1\">
+            <button type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#addUsers\">
+              <span class=\"glyphicon glyphicon-user\"></span>
+            </button>
+          </div>
+          <div class=\"col-xs-2 col-sm-1\">
+            <button type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#myModal\">
+              <span class=\"glyphicon glyphicon-plus-sign\"></span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -118,6 +130,12 @@
   <script type=\"text/javascript\" src=\"../../public/dist/carousel-native.js\"></script>
       {$footer}
     ";
+
+    if(($_SESSION['IPAddress'] == $_SERVER['REMOTE_ADDR']) && ($expireTime > date("Y-m-d H:i:s")) && ($_SESSION['BrowserData'] == $_SERVER['HTTP_USER_AGENT'])) {
+      return $page;
+    } else {
+      return "Sorry something when wrong";
+    }
   }
 
   echo mainPage();
