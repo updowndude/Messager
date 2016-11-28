@@ -34,10 +34,12 @@
       exit($strErrorMessage);
     } else {
       $clientHost = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+      // web hosting service that is being used doesn't send this data
       $serveHost = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
 
       if ($clientHost != $serveHost) {
-        exit($strErrorMessage);
+        return true;
+        // exit($strErrorMessage);
       } else {
         return true;
       }

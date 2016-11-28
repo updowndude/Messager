@@ -8,6 +8,3 @@ To start the project Gulp
 
 ## * dependencies
     1. Node JS
-
-### testing purposes
-path /Applications/MAMP/htdocs/Messager
