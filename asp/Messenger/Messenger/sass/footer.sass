@@ -1,0 +1,44 @@
+//by Correy Winke
+// 10/17/16
+@charset "UTF-8"
+
+// font family to be resued
+\:root
+  --mainTwithoutSize: 'PT Serif', serif
+
+// style the arrow at footer
+.movers
+  position: fixed
+  bottom: 0.5rem
+  @media screen and (max-width: 440px)
+    bottom: 2.25em
+
+  a
+    background-color: #337ab7 !important
+    border-color: #337ab7 !important
+    color: #fff !important
+    font-size: 1.3rem
+
+    &:hover
+      background-color: #025aa5 !important
+
+// styles the footer
+footer
+  margin-top: 0.75em
+  position: fixed
+  bottom: 0
+  width: 100%
+  font: 1.2em var(--mainTwithoutSize)
+  background-color: rgba(117,202,235,0.3)
+  letter-spacing: 1.2em
+  color:  #D1F8A1
+
+  p
+    text-align: center
+    font-size: 1.25em
+    margin-bottom: -0.1em
+    letter-spacing: 0.5em
+
+  // rucksack funcation
+  h3
+    font-size: responsive

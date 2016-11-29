@@ -1,5 +1,5 @@
 {
-  "name": "Messager",
+  "name": "Messenger",
   "version": "0.0.1",
   "description": "inclass overworking assigment",
   "main": "index.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/updowndude/Messager"
+    "url": "https://github.com/updowndude/Messenger"
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
