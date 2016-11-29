@@ -1,6 +1,7 @@
 /* @flow */
 // by correy winke
 // 10/17/16
+require('es6-promise').polyfill();
 import gulp from 'gulp';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
@@ -12,6 +13,7 @@ import browserSync from 'browser-sync';
 import lost from 'lost';
 import connect from 'gulp-connect-php';
 import dart from 'gulp-dart';
+import ts from 'gulp-typescript';
 
 browserSync.create();
 
@@ -26,7 +28,7 @@ gulp.task('sass', () => {
 	];
 
 	// compile sass to css then use post css
-	return gulp.src('./sass/myStyle.sass')
+	return gulp.src('./asp/Messenger/Messenger/sass/myStyle.sass')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(sourcemaps.write())
 		.pipe(sourcemaps.write('maps', {
@@ -34,8 +36,17 @@ gulp.task('sass', () => {
 			sourceRoot: 'source'
 		}))
 		.pipe(postcss(processors))
-    .pipe(gulp.dest('public/dist'));
+    .pipe(gulp.dest('asp/Messenger/Messenger/public/dist'));
     // .pipe(livereload());
+});
+
+gulp.task('ts', () => {
+    return gulp.src('asp/Messenger/Messenger/typescript/*.ts')
+        .pipe(ts({
+            noImplicitAny: true,
+            out: 'output.js'
+        }))
+        .pipe(gulp.dest('asp/Messenger/Messenger/public/dist'));
 });
 
 gulp.task("js", () => {
@@ -50,7 +61,7 @@ gulp.task("js", () => {
 });
 
 // browserSync if chnage
-gulp.task('js-watch', ['js'], () => {
+gulp.task('js-watch', ['ts'], () => {
 	browserSync.reload();
 });
 
@@ -68,7 +79,7 @@ gulp.task('default', () => {
 
 	// see if there a change
 	gulp.watch('./sass/*.sass', ['sass-watch']);
-	gulp.watch('./dart/*.dart', ['js-watch']);
+	gulp.watch('./asp/Messenger/Messenger/typescript/*.ts', ['js-watch']);
 	gulp.watch('./*.php').on('change', () => {
 		browserSync.reload();
 	});
