@@ -13,7 +13,8 @@ import browserSync from 'browser-sync';
 import lost from 'lost';
 import connect from 'gulp-connect-php';
 import dart from 'gulp-dart';
-import ts from 'gulp-typescript';
+import browserify from 'gulp-browserify';
+import webpack from 'gulp-webpack';
 
 browserSync.create();
 
@@ -40,16 +41,29 @@ gulp.task('sass', () => {
     // .pipe(livereload());
 });
 
-gulp.task('ts', () => {
-    return gulp.src('asp/Messenger/Messenger/typescript/*.ts')
-        .pipe(ts({
-            noImplicitAny: true,
-            out: 'output.js'
-        }))
-        .pipe(gulp.dest('asp/Messenger/Messenger/public/dist'));
+gulp.task('js', () => {
+	return gulp.src('asp/Messenger/Messenger/javascript/hello.js')
+		.pipe(sourcemaps.init())
+		.pipe(webpack({
+			module: {
+				loaders: [{
+					loader: 'babel-loader',
+					exclude: /node_modules/,
+					query: {
+						presets: ['es2015', 'es2016', 'es2017']
+					}
+				}]
+			},
+			output: {
+				filename: 'my-com.js'
+			}
+		}))
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest('asp/Messenger/Messenger/public/dist'));
+    // .pipe(livereload());
 });
 
-gulp.task("js", () => {
+gulp.task('dart', () => {
   return gulp
     .src('dart/*.dart')
     .pipe(dart({
@@ -61,7 +75,7 @@ gulp.task("js", () => {
 });
 
 // browserSync if chnage
-gulp.task('js-watch', ['ts'], () => {
+gulp.task('js-watch', ['dart'], () => {
 	browserSync.reload();
 });
 
@@ -69,8 +83,13 @@ gulp.task('sass-watch', ['sass'], () => {
 	browserSync.reload();
 });
 
-// just gulp to start
 gulp.task('default', () => {
+	gulp.watch('./asp/Messenger/Messenger/sass/*.sass', ['sass']);
+	gulp.watch('./asp/Messenger/Messenger/javascript/*.js', ['js']);
+});
+
+// just gulp to start
+gulp.task('browserSync', () => {
 	connect.server({}, () => {
 		browserSync({
 			proxy: '127.0.0.1:8000'
@@ -79,7 +98,7 @@ gulp.task('default', () => {
 
 	// see if there a change
 	gulp.watch('./sass/*.sass', ['sass-watch']);
-	gulp.watch('./asp/Messenger/Messenger/typescript/*.ts', ['js-watch']);
+	gulp.watch('./dart/*.dart', ['js-watch']);
 	gulp.watch('./*.php').on('change', () => {
 		browserSync.reload();
 	});
