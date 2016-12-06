@@ -53,7 +53,7 @@
                      <asp:Button ID="btnLogin" runat="server" Text="Sumbit" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
                   </div>
                </div>
-                <asp:SqlDataSource ID="loginPerson" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger %>' ProviderName='<%$ ConnectionStrings:Messenger.ProviderName %>' SelectCommand="SELECT * FROM [person] WHERE (([fName] = ?) AND ([lName] = ?) AND ([birthday] = ?))">
+                <asp:SqlDataSource ID="loginPerson" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger2 %>' ProviderName='<%$ ConnectionStrings:Messenger2.ProviderName %>' SelectCommand="SELECT * FROM [person] WHERE (([fName] = ?) AND ([lName] = ?) AND ([birthday] = ?))">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="txtFName" PropertyName="Text" Name="fName" Type="String"></asp:ControlParameter>
                         <asp:ControlParameter ControlID="txtLName" PropertyName="Text" Name="lName" Type="String"></asp:ControlParameter>

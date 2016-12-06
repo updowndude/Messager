@@ -27,8 +27,19 @@ namespace Messenger
                 DataView datView = (DataView) loginPerson.Select(DataSourceSelectArguments.Empty);
                 if (datView.Count == 0)
                 {
-                    loginPerson.InsertCommand = $"INSERT INTO [person] ([fName], [lName], [birthday]) VALUES ('{txtFName.Text}', '{txtLName.Text}', '{txtBDay.Text} 00:00:00')";
-                    loginPerson.Insert();
+                    try
+                    {
+                        loginPerson.InsertCommand = "INSERT INTO [person] ([fName], [lName], [birthday]) VALUES ('" + txtFName.Text + "', '" + txtLName.Text + "', '" + txtBDay.Text + " 00:00:00')";
+                        loginPerson.Insert();
+                    }
+                    catch (Exception)
+                    {
+                        txtFName.Focus();
+                        txtFName.Text = "";
+                        txtLName.Text = "";
+                        txtBDay.Text = "";
+                    }
+                    
                     Session["fName"] = txtFName.Text;
                     Session["lName"] = txtLName.Text;
                     Session["bDay"] = txtBDay.Text;
@@ -45,6 +56,7 @@ namespace Messenger
                 Response.Redirect("pages/groups.aspx", false);
             } else
             {
+                txtFName.Focus();
                 txtFName.Text = "";
                 txtLName.Text = "";
                 txtBDay.Text = "";

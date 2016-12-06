@@ -49,15 +49,6 @@ namespace Messenger {
         protected global::System.Web.UI.WebControls.SqlDataSource sqlAllUsers;
         
         /// <summary>
-        /// sqlAllGroups control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlAllGroups;
-        
-        /// <summary>
         /// dlistGroups control.
         /// </summary>
         /// <remarks>
