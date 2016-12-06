@@ -13,19 +13,21 @@ namespace Messenger
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtBDay.Attributes.Add("placeholder", "mm/dd/yyyy");
+            txtBDay.Attributes.Add("placeholder", "yyyy-mm-dd");
             btnLogin.Attributes.Add("disabled", "ture");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            Regex rgx = new Regex(@"^\d{2}\/\d{2}\/\d{4}$");
+            Regex rgx = new Regex(@"^\d{4}-\d{2}-\d{2}$");
+            String[] aryStrValue = txtBDay.Text.Split('-');
 
-            if((rgx.IsMatch(txtBDay.Text.Trim()) == true) && (txtFName.Text.Trim() != "") && (txtLName.Text.Trim() != ""))
+            if((rgx.IsMatch(txtBDay.Text.Trim()) == true) && (txtFName.Text.Trim() != "") && (txtLName.Text.Trim() != "") && (int.Parse(aryStrValue[1]) <= 12) && (int.Parse(aryStrValue[2]) <= 31))
             {
                 DataView datView = (DataView) loginPerson.Select(DataSourceSelectArguments.Empty);
                 if (datView.Count == 0)
                 {
+                    loginPerson.InsertCommand = $"INSERT INTO [person] ([fName], [lName], [birthday]) VALUES ('{txtFName.Text}', '{txtLName.Text}', '{txtBDay.Text} 00:00:00')";
                     loginPerson.Insert();
                     Session["fName"] = txtFName.Text;
                     Session["lName"] = txtLName.Text;

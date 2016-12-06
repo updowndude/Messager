@@ -31,6 +31,15 @@ namespace Messenger {
         protected global::System.Web.UI.WebControls.SqlDataSource getGroups;
         
         /// <summary>
+        /// sqlClicker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlClicker;
+        
+        /// <summary>
         /// sqlAllUsers control.
         /// </summary>
         /// <remarks>
@@ -49,22 +58,67 @@ namespace Messenger {
         protected global::System.Web.UI.WebControls.SqlDataSource sqlAllGroups;
         
         /// <summary>
-        /// DataList1 control.
+        /// dlistGroups control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList DataList1;
+        protected global::System.Web.UI.WebControls.DataList dlistGroups;
         
         /// <summary>
-        /// addGroupForm control.
+        /// dlFeedbackGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm addGroupForm;
+        protected global::System.Web.UI.WebControls.DropDownList dlFeedbackGroup;
+        
+        /// <summary>
+        /// dlRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dlRating;
+        
+        /// <summary>
+        /// txtMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMessage;
+        
+        /// <summary>
+        /// btnFeedbackSumbit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFeedbackSumbit;
+        
+        /// <summary>
+        /// lblFullName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFullName;
+        
+        /// <summary>
+        /// lblBDay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBDay;
         
         /// <summary>
         /// btnLogOut control.
