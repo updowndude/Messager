@@ -26,7 +26,7 @@ namespace Messenger
         {
             if(btnAddGroup.Text.Trim() != "")
             {
-                sqlAllGroups.InsertCommand = $"INSERT INTO [groups] ([name], [data_added]) VALUES (\"{txtGroupName.Text}\", \"{DateTime.Today}\")";
+                sqlAllGroups.InsertCommand = "INSERT INTO [groups] ([name], [data_added]) VALUES ('" + txtGroupName.Text + "', #" + DateTime.Today + "#)";
                 sqlAllGroups.Insert();
                 sqlAllGroups.SelectCommand = "SELECT TOP 1  * FROM groups ORDER BY groups_id DESC";
                 DataView dvSql = (DataView)(sqlAllGroups.Select(DataSourceSelectArguments.Empty));

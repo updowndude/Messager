@@ -29,15 +29,15 @@
       </ul>
    </nav>
    <section>
-      <asp:SqlDataSource ID="getGroups" runat="server" ConnectionString="<%$ ConnectionStrings:Messenger %>" ProviderName="<%$ ConnectionStrings:Messenger.ProviderName %>" SelectCommand="SELECT  groups.name, person.person_id, person.fName, person.lName, person.picture, person.birthday FROM ((person INNER JOIN people_group ON person.person_id = people_group.person_id) INNER JOIN groups ON people_group.groups_id = groups.groups_id) WHERE (person.fName = ?) AND (person.lName = ?) AND (person.birthday = ?)">
+      <asp:SqlDataSource ID="getGroups" runat="server" ConnectionString="<%$ ConnectionStrings:Messenger2 %>" ProviderName="<%$ ConnectionStrings:Messenger.ProviderName %>" SelectCommand="SELECT  groups.name, person.person_id, person.fName, person.lName, person.picture, person.birthday FROM ((person INNER JOIN people_group ON person.person_id = people_group.person_id) INNER JOIN groups ON people_group.groups_id = groups.groups_id) WHERE (person.fName = ?) AND (person.lName = ?) AND (person.birthday = ?)">
          <SelectParameters>
             <asp:SessionParameter Name="fName" SessionField="fName" Type="String" />
             <asp:SessionParameter Name="lName" SessionField="lName" Type="String" />
             <asp:SessionParameter Name="birthday" SessionField="bDay" Type="DateTime" />
          </SelectParameters>
       </asp:SqlDataSource>
-      <asp:SqlDataSource ID="sqlAllUsers" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger %>' ProviderName='<%$ ConnectionStrings:Messenger.ProviderName %>' SelectCommand="SELECT fName+ '   ' + lName AS fullPerson FROM [person]"></asp:SqlDataSource>
-      <asp:SqlDataSource ID="sqlAllGroups" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger %>' ProviderName='<%$ ConnectionStrings:Messenger.ProviderName %>' SelectCommand="SELECT * FROM [groups]"></asp:SqlDataSource>
+      <asp:SqlDataSource ID="sqlAllUsers" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger2 %>' ProviderName='<%$ ConnectionStrings:Messenger.ProviderName %>' SelectCommand="SELECT fName+ '   ' + lName AS fullPerson FROM [person]"></asp:SqlDataSource>
+      <asp:SqlDataSource ID="sqlAllGroups" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger2 %>' ProviderName='<%$ ConnectionStrings:Messenger.ProviderName %>' SelectCommand="SELECT * FROM [groups]"></asp:SqlDataSource>
       <article id="Groups">
          <asp:DataList ID="DataList1" runat="server" DataSourceID="getGroups">
             <ItemTemplate>

@@ -13,7 +13,6 @@ import browserSync from 'browser-sync';
 import lost from 'lost';
 import connect from 'gulp-connect-php';
 import dart from 'gulp-dart';
-import browserify from 'gulp-browserify';
 import webpack from 'gulp-webpack';
 
 browserSync.create();
