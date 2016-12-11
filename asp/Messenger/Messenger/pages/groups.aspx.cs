@@ -15,14 +15,21 @@ namespace Messenger
             lblUser.Text = ""+Session["fName"]+" "+Session["lName"];
             lblFullName.Text = ""+Session["fName"]+" "+Session["lName"];
             lblBDay.Text = Session["bDay"].ToString();
-            btnAddGroup.Attributes.Add("disabled", "true");
+            btnAddGroup.Attributes.Add("disabled", "false");
             btnFeedbackSumbit.Attributes.Add("disabled", "false");
+            btnAdimLogin.Attributes.Add("disabled", "false");
 
-            if (IsPostBack == true)
+            sqlClicker.SelectCommand = "SELECT * FROM [person] WHERE(([fName] = '" + Session["fName"] + "') AND ([lName] = '" + Session["lName"] + "') AND ([birthday] = #" + Session["bDay"] + " 00:00:00#)) ";
+            DataView dvSql = (DataView)(sqlClicker.Select(DataSourceSelectArguments.Empty));
+            foreach (DataRowView rowView in dvSql)
             {
-                sqlAllUsers.Select(DataSourceSelectArguments.Empty);
-                getGroups.Select(DataSourceSelectArguments.Empty);
+                if (rowView["picture"].ToString() != "")
+                {
+                    imgPersonPicture.ImageUrl = "../uploads/"+rowView["picture"].ToString();
+                }
             }
+
+            dlFeedbackGroup.DataBind();
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
@@ -51,12 +58,18 @@ namespace Messenger
 
                     sqlClicker.SelectCommand = "SELECT * FROM [person] WHERE(([fName] = '" + Session["fName"] + "') AND ([lName] = '" + Session["lName"] + "') AND ([birthday] = #" + Session["bDay"] + " 00:00:00#)) ";
                     DataView dvSql2 = (DataView)(sqlClicker.Select(DataSourceSelectArguments.Empty));
-                    foreach (DataRowView rowView2 in dvSql2)
-                    {
+                    foreach (DataRowView rowView2 in dvSql2) {
+
                         personID = rowView2["person_id"].ToString();
                     }
                     sqlClicker.InsertCommand = "INSERT INTO [people_group] ([groups_id], [person_id], [posted]) VALUES ('" + groupID + "', '" + personID + "', #" + DateTime.Today + "#) ";
                     sqlClicker.Insert();
+
+                    //sqlAllUsers.DataBind();
+                    //sqlClicker.DataBind();
+                    //sqlFeedback.DataBind();
+                    //getGroups.DataBind();
+                    //getGroups2.DataBind();
 
                     txtGroupName.Text = "";
                 }
@@ -136,6 +149,96 @@ namespace Messenger
             Button btn = (Button)sender;
             Session["name"] = btn.Text;
             Response.Redirect("post.aspx", false);
+        }
+
+        protected void btnAdimLogin_Click(object sender, EventArgs e)
+        {
+            if (txtAdimKey.Text.Trim() != "") {
+                try
+                {
+                    sqlClicker.SelectCommand = "SELECT adim_key FROM [adims] WHERE [adim_key] = '"+txtAdimKey.Text+"'";
+                    DataView dvSql2 = (DataView)(sqlClicker.Select(DataSourceSelectArguments.Empty));
+                    foreach (DataRowView rowView2 in dvSql2)
+                    {
+                        Session["adim"] = rowView2["adim_key"];
+                    }
+
+                    txtAdimKey.Text = "";
+                }
+                catch (Exception)
+                {
+                    txtAdimKey.Focus();
+                    txtAdimKey.Text = "";
+                }
+            }
+            else
+            {
+                txtAdimKey.Focus();
+                txtAdimKey.Text = "";
+            }
+        }
+
+        protected void btnGroupDelete_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            sqlClicker.DeleteCommand = "DELETE FROM [people_group] WHERE [groups_id] = " + btn.Text + "";
+            sqlClicker.Delete();
+
+            sqlClicker.DeleteCommand = "DELETE FROM groups WHERE [groups_id] = " + btn.Text + "";
+            sqlClicker.Delete();
+        }
+
+        protected void btnPicture_Click(object sender, EventArgs e)
+        {
+            if (filePicture.HasFile)
+            {
+                try
+                {
+                    if ((filePicture.PostedFile.ContentType == "image/jpeg") || (filePicture.PostedFile.ContentType == "image/png"))
+                    {
+                        if (filePicture.PostedFile.ContentLength <= 10000000)
+                        {
+                            if (filePicture.FileName.IndexOf('.') <= 4)
+                            {
+                                Random ran = new Random();
+                                String strFileName = filePicture.FileName;
+                                strFileName = strFileName.Insert(strFileName.IndexOf('.'),ran.Next(0, 9999).ToString());
+
+                                filePicture.SaveAs(Server.MapPath("~/uploads/"+strFileName));
+                                sqlClicker.InsertCommand = "UPDATE person set [picture] = '" + strFileName + "' WHERE (([fName] = '" + Session["fName"] + "') AND ([lName] = '" + Session["lName"] + "') AND ([birthday] = #" + Session["bDay"] + " 00:00:00#)) ";
+                                sqlClicker.Insert();
+                            }
+                            else
+                            {
+                                lblError.Text = "Bad file name";
+                            }
+                        }
+                        else
+                        {
+                            lblError.Text = "File is to big";
+                        }
+                    }
+                    else
+                    {
+                        lblError.Text = "Wrong file type";
+                    }
+                }
+                catch (Exception)
+                {
+                    lblError.Text = "Sorry bad file";
+                }
+            }
+            else
+            {
+                lblError.Text = "Sorry bad file";
+            }
+        }
+
+        protected void timLogin_Tick(object sender, EventArgs e)
+        {
+            int intN = new Random().Next(0, 9);
+            Label lblTimer = (Label)upDatTimer.FindControl("lblTimer");
+            lblTimer.Text = intN.ToString();
         }
     }
 }

@@ -110,6 +110,7 @@
     <Folder Include="public\fonts\" />
     <Folder Include="public\images\" />
     <Folder Include="sass\" />
+    <Folder Include="uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

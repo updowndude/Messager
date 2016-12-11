@@ -6175,10 +6175,10 @@ footer {
   height: 20rem; }
 
 .curUserImage {
-  width: 32px;
-  width: 2rem;
-  height: 32px;
-  height: 2rem; }
+  width: 32px !important;
+  width: 2rem !important;
+  height: 32px !important;
+  height: 2rem !important; }
 
 #adimMenu > div > div.panel-body > hr {
   margin-bottom: -1.6px;
@@ -6195,3 +6195,16 @@ footer {
     height: 20rem;
     width: 320px;
     width: 20rem; }
+
+#Actions, #Data {
+  margin-bottom: 32px;
+  margin-bottom: 2rem; }
+
+#body_dlistGroups > tbody > tr:nth-child(1) > td > div, #body_dlistPosts > tbody > tr:nth-child(1) > td > div {
+  margin-top: 64px;
+  margin-top: 4rem; }
+
+#ctl00 > nav, #postsForm > nav {
+  position: fixed;
+  width: 100%;
+  z-index: 99999; }

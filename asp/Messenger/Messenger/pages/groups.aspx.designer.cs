@@ -22,6 +22,60 @@ namespace Messenger {
         protected global::System.Web.UI.WebControls.Label lblUser;
         
         /// <summary>
+        /// imgPersonPicture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPersonPicture;
+        
+        /// <summary>
+        /// scmLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scmLogin;
+        
+        /// <summary>
+        /// timLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer timLogin;
+        
+        /// <summary>
+        /// upDatTimer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upDatTimer;
+        
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
+        /// getGroups2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource getGroups2;
+        
+        /// <summary>
         /// getGroups control.
         /// </summary>
         /// <remarks>
@@ -29,6 +83,15 @@ namespace Messenger {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource getGroups;
+        
+        /// <summary>
+        /// sqlFeedback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlFeedback;
         
         /// <summary>
         /// sqlClicker control.
@@ -49,6 +112,15 @@ namespace Messenger {
         protected global::System.Web.UI.WebControls.SqlDataSource sqlAllUsers;
         
         /// <summary>
+        /// dlistGroups2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dlistGroups2;
+        
+        /// <summary>
         /// dlistGroups control.
         /// </summary>
         /// <remarks>
@@ -56,6 +128,15 @@ namespace Messenger {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList dlistGroups;
+        
+        /// <summary>
+        /// dlFeedbackGroup2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dlFeedbackGroup2;
         
         /// <summary>
         /// dlFeedbackGroup control.
@@ -94,6 +175,33 @@ namespace Messenger {
         protected global::System.Web.UI.WebControls.Button btnFeedbackSumbit;
         
         /// <summary>
+        /// dListFeedback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dListFeedback;
+        
+        /// <summary>
+        /// txtAdimKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAdimKey;
+        
+        /// <summary>
+        /// btnAdimLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdimLogin;
+        
+        /// <summary>
         /// lblFullName control.
         /// </summary>
         /// <remarks>
@@ -110,6 +218,24 @@ namespace Messenger {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBDay;
+        
+        /// <summary>
+        /// filePicture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload filePicture;
+        
+        /// <summary>
+        /// btnPicture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPicture;
         
         /// <summary>
         /// btnLogOut control.
@@ -146,6 +272,15 @@ namespace Messenger {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dlUser;
+        
+        /// <summary>
+        /// dlGroups2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dlGroups2;
         
         /// <summary>
         /// dlGroups control.

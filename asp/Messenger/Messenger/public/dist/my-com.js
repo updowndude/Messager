@@ -52,6 +52,15 @@
 	  } else if (document.title == 'Groups') {
 	    formChecker('#addGroupForm', '#body_btnAddGroup');
 	    formChecker('#feedBackForm', '#body_btnFeedbackSumbit');
+	    formChecker('#adimLogin', '#body_btnAdimLogin');
+
+	    if (document.querySelector('#body_dListFeedback') != null) {
+	      var dlistFeedback = document.querySelector('#body_dListFeedback');
+
+	      dlistFeedback.innerHTML = '\n      <thead>\n             <tr>\n               <th>Name</th>\n               <th>Birthday</th>\n               <th>Message</th>\n               <th>Rating</th>\n               <th>Group Name</th>\n               <th>Posted</th>\n            </tr>\n        </thead>\n      ' + dlistFeedback.innerHTML;
+	    }
+	  } else if (document.title == 'Posts') {
+	    formChecker('#postAdder', '#body_btnNewPost');
 	  }
 	}
 

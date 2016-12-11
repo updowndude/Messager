@@ -401,8 +401,7 @@ doc/api/
 pubspec.lock
 
 # Custom
-php/model/db.php
 sql/values.sql
 _raw
-.atom
 uploads
+asp/Messenger/Messenger/data

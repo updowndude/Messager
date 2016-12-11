@@ -31,6 +31,24 @@ namespace Messenger.pages {
         protected global::System.Web.UI.WebControls.LinkButton btnHome;
         
         /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
+        /// sqlMembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlMembers;
+        
+        /// <summary>
         /// sqlPosts control.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,15 @@ namespace Messenger.pages {
         protected global::System.Web.UI.WebControls.SqlDataSource sqlPosts;
         
         /// <summary>
+        /// sqlChanger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlChanger;
+        
+        /// <summary>
         /// dlistPosts control.
         /// </summary>
         /// <remarks>
@@ -47,5 +74,50 @@ namespace Messenger.pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList dlistPosts;
+        
+        /// <summary>
+        /// txtMessager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMessager;
+        
+        /// <summary>
+        /// fileVideo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileVideo;
+        
+        /// <summary>
+        /// btnNewPost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNewPost;
+        
+        /// <summary>
+        /// dListMembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dListMembers;
+        
+        /// <summary>
+        /// lblGroupData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGroupData;
     }
 }

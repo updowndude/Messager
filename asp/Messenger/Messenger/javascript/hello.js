@@ -4,6 +4,26 @@ function main() {
   } else if(document.title == 'Groups') {
     formChecker('#addGroupForm', '#body_btnAddGroup');
     formChecker('#feedBackForm', '#body_btnFeedbackSumbit');
+    formChecker('#adimLogin', '#body_btnAdimLogin');
+
+    if (document.querySelector('#body_dListFeedback') != null) {
+      let dlistFeedback = document.querySelector('#body_dListFeedback');
+
+      dlistFeedback.innerHTML = `
+      <thead>
+             <tr>
+               <th>Name</th>
+               <th>Birthday</th>
+               <th>Message</th>
+               <th>Rating</th>
+               <th>Group Name</th>
+               <th>Posted</th>
+            </tr>
+        </thead>
+      ${dlistFeedback.innerHTML}`;
+    }
+  } else if (document.title == 'Posts') {
+    formChecker('#postAdder', '#body_btnNewPost');
   }
 }
 

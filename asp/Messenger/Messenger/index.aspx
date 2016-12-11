@@ -1,12 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Messenger.index" MasterPageFile="~/layout.Master" %>
 <asp:Content ID="indexTitle" ContentPlaceHolderID="title" runat="server">
-    <link rel="stylesheet" type="text/css" href="public/dist/myStyle.css" />
-     <!-- links to rescoures -->
-    <link rel="icon", type="image/x-icon", href="public/images/favicon.ico" />
-    <link rel="shortcut icon", type="image/x-icon", href="public/images/favicon.ico" />
-    <title>Home</title>
+   <link rel="stylesheet" type="text/css" href="public/dist/myStyle.css" />
+   <!-- links to rescoures -->
+   <link rel="icon", type="image/x-icon", href="public/images/favicon.ico" />
+   <link rel="shortcut icon", type="image/x-icon", href="public/images/favicon.ico" />
+   <title>Home</title>
 </asp:Content>
-
 <asp:Content ID="index" ContentPlaceHolderID="body" runat="server">
    <div class="card">
       <div class="card-block">
@@ -53,17 +52,16 @@
                      <asp:Button ID="btnLogin" runat="server" Text="Sumbit" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
                   </div>
                </div>
-                <asp:SqlDataSource ID="loginPerson" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger2 %>' ProviderName='<%$ ConnectionStrings:Messenger2.ProviderName %>' SelectCommand="SELECT * FROM [person] WHERE (([fName] = ?) AND ([lName] = ?) AND ([birthday] = ?))">
-                    <SelectParameters>
-                        <asp:ControlParameter ControlID="txtFName" PropertyName="Text" Name="fName" Type="String"></asp:ControlParameter>
-                        <asp:ControlParameter ControlID="txtLName" PropertyName="Text" Name="lName" Type="String"></asp:ControlParameter>
-                        <asp:ControlParameter ControlID="txtBDay" PropertyName="Text" Name="birthday" Type="DateTime"></asp:ControlParameter>
-                    </SelectParameters>
-                </asp:SqlDataSource>
+               <asp:SqlDataSource ID="loginPerson" runat="server" ConnectionString='<%$ ConnectionStrings:Messenger2 %>' ProviderName='<%$ ConnectionStrings:Messenger2.ProviderName %>' SelectCommand="SELECT * FROM [person] WHERE (([fName] = ?) AND ([lName] = ?) AND ([birthday] = ?))">
+                  <SelectParameters>
+                     <asp:ControlParameter ControlID="txtFName" PropertyName="Text" Name="fName" Type="String"></asp:ControlParameter>
+                     <asp:ControlParameter ControlID="txtLName" PropertyName="Text" Name="lName" Type="String"></asp:ControlParameter>
+                     <asp:ControlParameter ControlID="txtBDay" PropertyName="Text" Name="birthday" Type="DateTime"></asp:ControlParameter>
+                  </SelectParameters>
+               </asp:SqlDataSource>
             </form>
          </div>
       </div>
    </div>
-
-    <script src="public/dist/my-com.js" type="text/javascript"></script>
+   <script src="public/dist/my-com.js" type="text/javascript"></script>
 </asp:Content>
