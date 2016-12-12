@@ -23,13 +23,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <main>
       <asp:ContentPlaceHolder ID="body" runat="server">
         
        </asp:ContentPlaceHolder>
     <footer>
       <p> Correy Winke, &copy; 2016.</p>
     </footer>
-    </main>
 </body>
 </html>

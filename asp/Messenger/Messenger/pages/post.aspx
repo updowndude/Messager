@@ -55,11 +55,11 @@
                      <div class="card-block">
                         <h3 class="card-title">
                            <asp:Label Text='<%# Eval("fullPerson") %>' runat="server" id="lblFullName"/>
-                           <asp:Image ID="imgPersonPicture" runat="server" ImageUrl='<%# Eval("picture").ToString() != "" ? "../uploads/"+Eval("picture") : "../../public/images/default.jpg" %>' AlternateText="User picture" CssClass="curUserImage" />
+                           <asp:Image ID="imgPersonPicture" runat="server" ImageUrl='<%# Eval("picture").ToString() != "" ? "~/uploads/"+Eval("picture") : "~/public/images/default.jpg" %>' AlternateText="User picture" CssClass="curUserImage" />
                         </h3>
                         <asp:Label Text='<%# Eval("message") %>' runat="server" id="lblMessage"/>
                         <br />
-                        <%# Eval("video").ToString() != "" ? "<div align=\"center\" class=\"embed-responsive embed-responsive-16by9\">  <video autoplay loop class=\"embed-responsive-item\" controls>  <source src=\"../../uploads/"+Eval("video")+"\" type=\"video/mp4\"> </video> </div>  " : "" %>
+                        <%# Eval("video").ToString() != "" ? "<div align=\"center\" class=\"embed-responsive embed-responsive-16by9\">  <video autoplay loop class=\"embed-responsive-item\" controls>  <source src=\"../uploads/"+Eval("video")+"\" type=\"video/mp4\" /></video> </div>  " : "" %>
                         <asp:Label Text='<%# Eval("posted") %>' runat="server" id="lblPosted"/>
                         <% if( Session["adim"] != null) { %>
                         <asp:Button ID="btnPostDelete" CssClass="btn btn-primary" runat="server" Text='<%# Eval("people_group_id") %>' OnClick="btnPostDelete_Click" />

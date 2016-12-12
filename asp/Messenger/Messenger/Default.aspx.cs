@@ -53,6 +53,7 @@ namespace Messenger
                     }
                 }
 
+                Session["loginTime"] = DateTime.Now;
                 Response.Redirect("Groups", false);
             } else
             {

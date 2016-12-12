@@ -404,4 +404,4 @@ pubspec.lock
 sql/values.sql
 _raw
 uploads
-asp/Messenger/Messenger/data
+data

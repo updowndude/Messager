@@ -22,8 +22,15 @@ function main() {
         </thead>
       ${dlistFeedback.innerHTML}`;
     }
+
+    if(document.querySelector('#Groups').innerHTML.trim().length == 0) {
+      document.querySelector('#About').style.paddingTop = '5rem';
+    }
   } else if (document.title == 'Posts') {
     formChecker('#postAdder', '#body_btnNewPost');
+    if(document.querySelector('#Posts').innerHTML.trim().length == 0) {
+      document.querySelector('#Add').style.paddingTop = '4rem';
+    }
   }
 }
 

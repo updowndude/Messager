@@ -31,7 +31,6 @@ namespace Messenger
                 lblUser.Text = ""+Session["fName"]+" "+Session["lName"];
                 lblFullName.Text = ""+Session["fName"]+" "+Session["lName"];
                 lblBDay.Text = Session["bDay"].ToString();
-                Session["loginTime"] = DateTime.Now;
             }
             else
             {

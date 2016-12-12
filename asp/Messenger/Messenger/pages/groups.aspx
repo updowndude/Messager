@@ -29,12 +29,12 @@
             <li class="nav-item">
                <a class="nav-link" href="#User">
                   <asp:Label ID="lblUser" runat="server" Text="fasfsdf"></asp:Label>
-                  <asp:Image ID="imgPersonPicture" runat="server" ImageUrl="../../public/images/default.jpg" AlternateText="User picture" CssClass="curUserImage" />
+                  <asp:Image ID="imgPersonPicture" runat="server" ImageUrl="~/public/images/default.jpg" AlternateText="User picture" CssClass="curUserImage" />
                </a>
             </li>
             <li class="nav-item">
                <a class="nav-link" href="#">
-                  <asp:Timer id="timLogin" runat="server" Interval="1000" OnTick="timLogin_Tick"></asp:Timer>
+                  <asp:Timer id="timLogin" runat="server" Interval="300000" OnTick="timLogin_Tick"></asp:Timer>
                   <asp:UpdatePanel ID="upDatTimer" runat="server">
                      <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="timLogin" />
