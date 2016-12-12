@@ -29,9 +29,9 @@
             <li class="nav-item active">
                <a class="nav-link" href="#Data">Data</a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
                <a class="nav-link" href="#User">
-                   <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+                  <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                </a>
             </li>
          </ul>
@@ -55,15 +55,11 @@
                      <div class="card-block">
                         <h3 class="card-title">
                            <asp:Label Text='<%# Eval("fullPerson") %>' runat="server" id="lblFullName"/>
-                          
-                         <asp:Image ID="imgPersonPicture" runat="server" ImageUrl='<%# Eval("picture").ToString() != "" ? "../uploads/"+Eval("picture") : "../../public/images/default.jpg" %>' AlternateText="User picture" CssClass="curUserImage" />
-         
-                           
+                           <asp:Image ID="imgPersonPicture" runat="server" ImageUrl='<%# Eval("picture").ToString() != "" ? "../uploads/"+Eval("picture") : "../../public/images/default.jpg" %>' AlternateText="User picture" CssClass="curUserImage" />
                         </h3>
                         <asp:Label Text='<%# Eval("message") %>' runat="server" id="lblMessage"/>
                         <br />
-                         <%# Eval("video").ToString() != "" ? "<div align=\"center\" class=\"embed-responsive embed-responsive-16by9\">  <video autoplay loop class=\"embed-responsive-item\" controls>  <source src=\"../../uploads/"+Eval("video")+"\" type=\"video/mp4\"> </video> </div>  " : "" %>
-   
+                        <%# Eval("video").ToString() != "" ? "<div align=\"center\" class=\"embed-responsive embed-responsive-16by9\">  <video autoplay loop class=\"embed-responsive-item\" controls>  <source src=\"../../uploads/"+Eval("video")+"\" type=\"video/mp4\"> </video> </div>  " : "" %>
                         <asp:Label Text='<%# Eval("posted") %>' runat="server" id="lblPosted"/>
                         <% if( Session["adim"] != null) { %>
                         <asp:Button ID="btnPostDelete" CssClass="btn btn-primary" runat="server" Text='<%# Eval("people_group_id") %>' OnClick="btnPostDelete_Click" />
@@ -88,13 +84,12 @@
                            <asp:TextBox ID="txtMessager" TextMode="multiline" CssClass="form-control message" runat="server" Rows="3"></asp:TextBox>
                         </div>
                      </div>
-                      <div class="form-group">
-                          <label class="custom-file">
-  <asp:FileUpload ID="fileVideo"  CssClass="custom-file-input" runat="server" />
-  <span class="custom-file-control"></span>
-</label>
-                      </div>
-                      
+                     <div class="form-group">
+                        <label class="custom-file">
+                           <asp:FileUpload ID="fileVideo"  CssClass="custom-file-input" runat="server" />
+                           <span class="custom-file-control"></span>
+                        </label>
+                     </div>
                      <asp:Button ID="btnNewPost"  CssClass="btn btn-primary" runat="server" Text="Add" OnClick="btnNewPost_Click" />
                      <% } %>
                   </div>
@@ -102,24 +97,20 @@
             </div>
          </article>
          <article id="Members">
-             <div class="card">
-                     <div class="card-block">
-                        <h3 class="card-title">Members</h3>
-            <asp:DataList ID="dListMembers" runat="server" DataSourceID="sqlMembers" CssClass="table">
-               <ItemTemplate>
-                  
-                              <tr>
-                                 <th scope="row">
-                                    <asp:Label Text='<%# Eval("fullPerson") %>' runat="server" ID="lblMembersFullPerson" />
-                                 </th>
-                              </tr>
-                  
-              
-                   
-               </ItemTemplate>
-            </asp:DataList>
-                           </div>
-                  </div>
+            <div class="card">
+               <div class="card-block">
+                  <h3 class="card-title">Members</h3>
+                  <asp:DataList ID="dListMembers" runat="server" DataSourceID="sqlMembers" CssClass="table">
+                     <ItemTemplate>
+                        <tr>
+                           <th scope="row">
+                              <asp:Label Text='<%# Eval("fullPerson") %>' runat="server" ID="lblMembersFullPerson" />
+                           </th>
+                        </tr>
+                     </ItemTemplate>
+                  </asp:DataList>
+               </div>
+            </div>
          </article>
          <article id="Data">
             <div class="card">

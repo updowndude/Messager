@@ -12,9 +12,6 @@ namespace Messenger
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblUser.Text = ""+Session["fName"]+" "+Session["lName"];
-            lblFullName.Text = ""+Session["fName"]+" "+Session["lName"];
-            lblBDay.Text = Session["bDay"].ToString();
             btnAddGroup.Attributes.Add("disabled", "false");
             btnFeedbackSumbit.Attributes.Add("disabled", "false");
             btnAdimLogin.Attributes.Add("disabled", "false");
@@ -29,13 +26,29 @@ namespace Messenger
                 }
             }
 
+            if (!IsPostBack)
+            {
+                lblUser.Text = ""+Session["fName"]+" "+Session["lName"];
+                lblFullName.Text = ""+Session["fName"]+" "+Session["lName"];
+                lblBDay.Text = Session["bDay"].ToString();
+                Session["loginTime"] = DateTime.Now;
+            }
+            else
+            {
+                dlGroups.DataBind();
+                dlGroups2.DataBind();
+                dlistGroups.DataBind();
+                dlistGroups2.DataBind();
+                dlUser.DataBind();
+            }
+
             dlFeedbackGroup.DataBind();
         }
 
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
             Session.Abandon();
-            Response.Redirect("../index.aspx", false);
+            Response.Redirect("Home", false);
         }
 
         protected void btnAddGroup_Click(object sender, EventArgs e)
@@ -64,12 +77,6 @@ namespace Messenger
                     }
                     sqlClicker.InsertCommand = "INSERT INTO [people_group] ([groups_id], [person_id], [posted]) VALUES ('" + groupID + "', '" + personID + "', #" + DateTime.Today + "#) ";
                     sqlClicker.Insert();
-
-                    //sqlAllUsers.DataBind();
-                    //sqlClicker.DataBind();
-                    //sqlFeedback.DataBind();
-                    //getGroups.DataBind();
-                    //getGroups2.DataBind();
 
                     txtGroupName.Text = "";
                 }
@@ -148,7 +155,7 @@ namespace Messenger
         {
             Button btn = (Button)sender;
             Session["name"] = btn.Text;
-            Response.Redirect("post.aspx", false);
+            Response.Redirect("Post", false);
         }
 
         protected void btnAdimLogin_Click(object sender, EventArgs e)
@@ -236,9 +243,10 @@ namespace Messenger
 
         protected void timLogin_Tick(object sender, EventArgs e)
         {
-            int intN = new Random().Next(0, 9);
-            Label lblTimer = (Label)upDatTimer.FindControl("lblTimer");
-            lblTimer.Text = intN.ToString();
+            Label lblTimer = (Label)upDatTimer.Controls[0].Controls[1];
+            DateTime sessionTime = Convert.ToDateTime(Session["loginTime"]);
+            TimeSpan dtLoginTime = DateTime.Now.Subtract(sessionTime);
+            lblTimer.Text = "Minutes Login: "+dtLoginTime.TotalMinutes.ToString("N2");
         }
     }
 }

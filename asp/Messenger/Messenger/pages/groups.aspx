@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="groups.aspx.cs" Inherits="Messenger.groups" MasterPageFile="~/layout.Master" %>
+﻿<%@ Page Language="C#" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="groups.aspx.cs" Inherits="Messenger.groups" MasterPageFile="~/layout.Master" %>
 <asp:Content ID="groupsTitle" ContentPlaceHolderID="title" runat="server">
    <link rel="stylesheet" type="text/css" href="../public/dist/myStyle.css" />
    <!-- links to rescoures -->
@@ -8,6 +8,7 @@
 </asp:Content>
 <asp:Content ID="groupsPage" ContentPlaceHolderID="body" runat="server">
    <form runat="server">
+      <asp:ScriptManager ID="scmLogin" runat="server"></asp:ScriptManager>
       <nav class="navbar navbar-light bg-faded">
          <ul class="nav navbar-nav">
             <li class="nav-item active">
@@ -31,23 +32,22 @@
                   <asp:Image ID="imgPersonPicture" runat="server" ImageUrl="../../public/images/default.jpg" AlternateText="User picture" CssClass="curUserImage" />
                </a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
                <a class="nav-link" href="#">
-                   <asp:ScriptManager ID="scmLogin" runat="server"></asp:ScriptManager>
-                   <asp:Timer id="timLogin" runat="server" Interval="1000" OnTick="timLogin_Tick"></asp:Timer>
-                   <asp:UpdatePanel ID="upDatTimer" runat="server">
-                       <Triggers>
-                           <asp:AsyncPostBackTrigger ControlID="timLogin" />
-                       </Triggers>
-                       <ContentTemplate>
-                           <asp:Label runat="server" Text="lblTimer"></asp:Label>
-                       </ContentTemplate>
-                   </asp:UpdatePanel>
+                  <asp:Timer id="timLogin" runat="server" Interval="1000" OnTick="timLogin_Tick"></asp:Timer>
+                  <asp:UpdatePanel ID="upDatTimer" runat="server">
+                     <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="timLogin" />
+                     </Triggers>
+                     <ContentTemplate>
+                        <asp:Label runat="server" Text="Timer"></asp:Label>
+                     </ContentTemplate>
+                  </asp:UpdatePanel>
                </a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
                <a class="nav-link" href="#User">
-                   <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+                  <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                </a>
             </li>
          </ul>
@@ -216,13 +216,13 @@
                         </tr>
                      </tbody>
                   </table>
-                   <div class="form-group">
-                          <label class="custom-file">
-  <asp:FileUpload ID="filePicture"  CssClass="custom-file-input" runat="server" />
-  <span class="custom-file-control"></span>
-</label>
-                      </div>
-                   <asp:Button ID="btnPicture" OnClick="btnPicture_Click" CssClass="btn btn-primary" runat="server" Text="Upload" />
+                  <div class="form-group">
+                     <label class="custom-file">
+                        <asp:FileUpload ID="filePicture"  CssClass="custom-file-input" runat="server" />
+                        <span class="custom-file-control"></span>
+                     </label>
+                  </div>
+                  <asp:Button ID="btnPicture" OnClick="btnPicture_Click" CssClass="btn btn-primary" runat="server" Text="Upload" />
                </div>
             </div>
          </article>

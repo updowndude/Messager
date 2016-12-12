@@ -58,6 +58,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="pages\groups.aspx" />
     <Content Include="layout.Master" />
     <None Include="Web.Debug.config">
@@ -68,11 +69,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="pages\post.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="pages\groups.aspx.cs">
       <DependentUpon>groups.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -80,12 +84,12 @@
     <Compile Include="pages\groups.aspx.designer.cs">
       <DependentUpon>groups.aspx</DependentUpon>
     </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="layout.Master.cs">
       <DependentUpon>layout.Master</DependentUpon>

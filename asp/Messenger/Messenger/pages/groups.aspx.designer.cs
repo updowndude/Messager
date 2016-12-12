@@ -13,6 +13,15 @@ namespace Messenger {
     public partial class groups {
         
         /// <summary>
+        /// scmLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scmLogin;
+        
+        /// <summary>
         /// lblUser control.
         /// </summary>
         /// <remarks>
@@ -29,15 +38,6 @@ namespace Messenger {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgPersonPicture;
-        
-        /// <summary>
-        /// scmLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager scmLogin;
         
         /// <summary>
         /// timLogin control.

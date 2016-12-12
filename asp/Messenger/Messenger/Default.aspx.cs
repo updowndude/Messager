@@ -53,7 +53,7 @@ namespace Messenger
                     }
                 }
 
-                Response.Redirect("pages/groups.aspx", false);
+                Response.Redirect("Groups", false);
             } else
             {
                 txtFName.Focus();

@@ -20,11 +20,17 @@ namespace Messenger.pages
 
             btnNewPost.Attributes.Add("disabled", "false");
             lblGroupData.Text = Session["name"].ToString();
+
+            if (IsPostBack)
+            {
+                dlistPosts.DataBind();
+                dListMembers.DataBind();
+            }
         }
 
         protected void btnHome_Click(object sender, EventArgs e)
         {
-            Response.Redirect("groups.aspx", false);
+            Response.Redirect("Groups", false);
         }
 
         protected void btnNewPost_Click(object sender, EventArgs e)

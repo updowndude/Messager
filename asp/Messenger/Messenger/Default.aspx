@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Messenger.index" MasterPageFile="~/layout.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Messenger.index" MasterPageFile="~/layout.Master" %>
 <asp:Content ID="indexTitle" ContentPlaceHolderID="title" runat="server">
    <link rel="stylesheet" type="text/css" href="public/dist/myStyle.css" />
    <!-- links to rescoures -->
