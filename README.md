@@ -1,15 +1,18 @@
 # Messenger
+Socail Media web app I built.
 
-Final project for three of my classes
+# Trello linke
+https://trello.com/b/VgMHPm6r/messenger-upgrade
 
-The code in this repository for my classes at Black Tech and for fall sixteen semester.
-
-To start the project Gulp
+# Start up
+vagrant up
+vagrant ssh
+cd /vagrant/ && hhvm -m server -p 8080
 
 ## dependencies
     1. Node JS
+    2. Vagrant
 
-## Asp problems
-    1. Groups and posts not showing up after insert
-    2. Delete post or group show the world delete not not number
-    3. Fix 403 forbidden for videos  
+# Dev step
+    1. CD to the project and run gulp
+    2. CD to the project and run start up commands

@@ -3,8 +3,8 @@
   // 10/27/16
   // opens up a database
   $dsn = 'mysql:host=localhost;dbname=cwinkebt_Messenger';
-  $username = 'root';
-  $password = 'root';
+  $username = 'gardening';
+  $password = '00:secreT,@';
   $error = '';
 
   // check to se it works
