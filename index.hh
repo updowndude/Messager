@@ -18,7 +18,7 @@
 </head>
 <body>
   <main>
-    {$ontentIndex}
+    {$contentIndex}
   </main>
 <!-- add the recouse for nav click -->
 <!-- dartium -->

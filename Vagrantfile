@@ -71,6 +71,9 @@ Vagrant.configure("2") do |config|
     mysql -u gardening --password=00:secreT,@ < sql/values.sql
     npm i
     composer install
+    ln -s /usr/bin/nodejs /usr/bin/node
+    chmod 777 ./install.sh
+    ./install.sh
     # apt-get install software-properties-common apt-transport-https
     # apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
