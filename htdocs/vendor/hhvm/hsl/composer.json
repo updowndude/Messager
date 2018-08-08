@@ -1,0 +1,14 @@
+{
+  "name": "hhvm/hsl",
+  "description": "The Hack Standard Library",
+  "require-dev": {
+    "hhvm": "^3.23.2",
+    "91carriage/phpunit-hhi": "^5.7",
+    "phpunit/phpunit": "^5.7",
+    "facebook/fbexpect": "^0.4",
+    "facebook/definition-finder": "^1.6.1"
+  },
+  "require": {
+    "hhvm/hhvm-autoload": "^1.4"
+  }
+}
