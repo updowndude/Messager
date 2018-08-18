@@ -21,8 +21,9 @@
     {$contentIndex}
   </main>
 <!-- add the recouse for nav click -->
-<!-- dartium -->
-<script src="public/dist/hello.dart.js" type="text/javascript"></script>
-<script type="application/dart" src="dart/hello.dart"></script>
+<script src="public/dist/bootstrap-native-v4.js" type="text/javascript"></script>
+<script src="public/dist/rx.js" type="text/javascript"></script>
+<script src="public/dist/indexFunction.js" type="module"></script>
+<script src="public/dist/main.js" type="module"></script>
 </body>
 </html>);

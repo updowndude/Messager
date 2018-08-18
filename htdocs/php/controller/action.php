@@ -1,16 +1,10 @@
-<?php
+<?hh
   function main() {
     require('defense.php');
 
-    if(($_SERVER['REQUEST_METHOD'] === 'POST') && (checkToken() == true) && (checkDomain() == true)) {
-      $_SESSION['IPAddress'] = $_SERVER['REMOTE_ADDR'];
-      $_SESSION['BrowserData'] = $_SERVER['HTTP_USER_AGENT'];
-      $_SESSION['loginValid'] = true;
-      $_SESSION['loginTime'] = date('Y-m-d H:i:s');
-      actions();
-    } else {
-      exit('Something happened');
-    }
+    !isset($_SESSION) ? session_start() : null;
+
+    (($_SERVER['REQUEST_METHOD'] === 'POST') && (checkToken() == true)) ? actions() : exit('Something happened');
   }
 
   function actions() {
@@ -687,4 +681,3 @@
   }
 
   main();
-?>

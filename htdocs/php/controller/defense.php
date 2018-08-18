@@ -1,81 +1,71 @@
-<?php
-  session_start();
-
-  function s($str) {
-    return htmlspecialchars($str);
-  }
-
-  function d($str) {
-    return addslashes($str);
-  }
-
-  function allowedValues($aryValues=[]) {
+<?hh
+/**
+ * Created by PhpStorm.
+ * User: correywinke
+ * Date: 3/7/17
+ * Time: 11:19 AM
+ */
+//only selected value are accepted
+function allowedValues($aryValues=[]) {
+    // makes emptry array
     $aryAllowValues = [];
-
+    // loops throught the values submit
     foreach ($aryValues as $curValue) {
-      if (isset($_POST[$curValue]) == true) {
-        $aryAllowValues[$curValue] = s(d($_POST[$curValue]));
-      } else {
-        $aryAllowValues[$curValue] = null;
-      }
+        // if that value makes what is in the post it's ok
+        if (isset($_POST[$curValue]) == true) {
+            // secure the value
+            $aryAllowValues[$curValue] = htmlspecialchars(addslashes($_POST[$curValue]));
+        } else {
+            // makes that nothing
+            $aryAllowValues[$curValue] = null;
+        }
     }
-
+    // get back the value
     return $aryAllowValues;
-  }
-
-  function checkDomain() {
-    $strErrorMessage = 'There was a problem';
-
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      exit($strErrorMessage);
-    }
-
-    if(isset($_SERVER['HTTP_REFERER']) == false) {
-      exit($strErrorMessage);
-    } else {
-      $clientHost = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
-      // web hosting service that is being used doesn't send this data
-      $serveHost = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
-
-      if ($clientHost != $serveHost) {
-        return true;
-        // exit($strErrorMessage);
-      } else {
-        return true;
-      }
-    }
-  }
-
-  function makeToken() {
+}
+// generates a random token
+function makeToken() {
+    // see how long the person been longed in
     if (checkTime() == false) {
-      $token = md5(uniqid(rand(), TRUE));
-      $_SESSION['token'] = $token;
-      $_SESSION['tokenTime'] = time();
-      return "<input type=\"hidden\" name=\"token\" value=\"{$token}\">";
+        // random token
+        $token = md5(uniqid((string) rand(), TRUE));
+        $_SESSION['token'] = $token;
+        $_SESSION['tokenTime'] = time();
+        // makes the new token
+        return $toke;
     } else {
-      return "<input type=\"hidden\" name=\"token\" value=\"{$_SESSION['token']}\">";
+        // display the token with the current value
+        return $_SESSION['token'];
     }
-  }
-
-  function checkTime() {
+}
+// check to if not been to long
+function checkTime() {
+    // no time has stared
     if(isset($_SESSION['tokenTime']) == false) {
-      return false;
+        return false;
     } else {
-      $timer = $_SESSION['tokenTime'] + (60 * 30);
+        // makes the varible to store the tiem when created
+        $timer = $_SESSION['tokenTime'] + (60 * 60);
     }
-
+    // check the time to see been to long
     if ($timer < time()) {
-      return false;
+        return false;
     } else {
-      return true;
+        // update toke time the user is active
+         $_SESSION['tokenTime'] = time();
+        return true;
     }
-  }
-
-  function checkToken() {
-    if ((htmlspecialchars($_POST['token']) != $_SESSION['token']) || (checkTime() == false)) {
-      return false;
+}
+// checks the token
+function checkToken() {
+    // see the session and client token are same and time is the same
+    if (isset($_SESSION['token']) == true) {
+        if ((htmlspecialchars((string) $_POST['token']) != $_SESSION['token']) || (checkTime() == false)) {
+            return false;
+        } else {
+            return true;
+        }
     } else {
-      return true;
+        return false;
     }
-  }
-?>
+}

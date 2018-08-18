@@ -35,7 +35,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('index', () => {
-	return gulp.src('./index.hh')
+	return gulp.src('./index.php')
 		.pipe(livereload());
 });
 
@@ -44,9 +44,15 @@ gulp.task('php', () => {
 		.pipe(livereload());
 });	
 
+gulp.task('publicDist', () => {
+	return gulp.src('public/dist/*.js')
+		.pipe(livereload());
+});	
+
 gulp.task('default', () => {
 	livereload.listen();
 	gulp.watch('./sass/*.sass', ['sass']);
-	gulp.watch('index.hh', ['index']);
+	gulp.watch('index.php', ['index']);
 	gulp.watch('php/**/*.php', ['php']);
+	gulp.watch('public/dist/*.js', ['publicDist']);
 });
