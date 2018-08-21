@@ -3,20 +3,21 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
 namespace HH\Lib\C;
 
 use namespace HH\Lib\_Private;
+use namespace HH\Lib\Str;
 
 /**
  * Returns the first value of the given Traversable for which the predicate
  * returns true, or null if no such value is found.
  */
+<<__RxLocal>>
 function find<T>(
   Traversable<T> $traversable,
   (function(T): bool) $value_predicate,
@@ -33,6 +34,7 @@ function find<T>(
  * Returns the key of the first value of the given KeyedTraversable for which
  * the predicate returns true, or null if no such value is found.
  */
+<<__RxLocal>>
 function find_key<Tk, Tv>(
   KeyedTraversable<Tk, Tv> $traversable,
   (function(Tv): bool) $value_predicate,
@@ -54,6 +56,7 @@ function find_key<Tk, Tv>(
  * - For single-element Traversables, see `C\onlyx`.
  * - For Awaitables that yield Traversables, see `C\first_async`.
  */
+<<__Rx>>
 function first<T>(
   Traversable<T> $traversable,
 ): ?T {
@@ -72,6 +75,7 @@ function first<T>(
  * - For single-element Traversables, see `C\onlyx`.
  * - For Awaitables that yield Traversables, see `C\firstx_async`.
  */
+<<__Rx>>
 function firstx<T>(
   Traversable<T> $traversable,
 ): T {
@@ -87,6 +91,7 @@ function firstx<T>(
  *
  * For non-empty Traversables, see `C\first_keyx`.
  */
+<<__Rx>>
 function first_key<Tk, Tv>(
   KeyedTraversable<Tk, Tv> $traversable,
 ): ?Tk {
@@ -104,6 +109,7 @@ function first_key<Tk, Tv>(
  *
  * For possibly empty Traversables, see `C\first_key`.
  */
+<<__Rx>>
 function first_keyx<Tk, Tv>(
   KeyedTraversable<Tk, Tv> $traversable,
 ): Tk {
@@ -120,6 +126,7 @@ function first_keyx<Tk, Tv>(
  * - For non-empty Traversables, see `C\lastx`.
  * - For single-element Traversables, see `C\onlyx`.
  */
+<<__RxLocal>>
 function last<Tv>(
   Traversable<Tv> $traversable,
 ): ?Tv {
@@ -141,6 +148,7 @@ function last<Tv>(
  * - For possibly empty Traversables, see `C\last`.
  * - For single-element Traversables, see `C\onlyx`.
  */
+<<__RxLocal>>
 function lastx<Tv>(Traversable<Tv> $traversable): Tv {
   // There is no way to directly check whether an Iterable is empty,
   // so convert to Array. For Hack Collections, this should
@@ -170,6 +178,7 @@ function lastx<Tv>(Traversable<Tv> $traversable): Tv {
  *
  * For non-empty Traversables, see `C\last_keyx`.
  */
+<<__RxLocal>>
 function last_key<Tk, Tv>(
   KeyedTraversable<Tk, Tv> $traversable,
 ): ?Tk {
@@ -194,10 +203,11 @@ function last_key<Tk, Tv>(
  *
  * For possibly empty Traversables, see `C\last_key`.
  */
+<<__RxLocal>>
 function last_keyx<Tk, Tv>(
   KeyedTraversable<Tk, Tv> $traversable,
 ): Tk {
-  $last_key = namespace\last_key($traversable);
+  $last_key = last_key($traversable);
   invariant($last_key !== null, '%s: Expected non-empty input', __FUNCTION__);
   return $last_key;
 }
@@ -210,6 +220,7 @@ function last_keyx<Tk, Tv>(
  * - For non-empty Traversables, see `C\firstx`.
  * - For single-element Traversables, see `C\onlyx`.
  */
+<<__Rx>>
 function nfirst<T>(
   ?Traversable<T> $traversable,
 ): ?T {
@@ -225,23 +236,42 @@ function nfirst<T>(
  * Returns the first and only element of the given Traversable, or throws if the
  * Traversable is empty.
  *
+ * An optional format string (and format arguments) may be passed to specify
+ * a custom message for the exception in the error case.
+ *
  * For Traversables with more than one element, see `C\firstx`.
  */
+<<__RxLocal>>
 function onlyx<T>(
   Traversable<T> $traversable,
+  ?Str\SprintfFormatString $format_string = null,
+  mixed ...$format_args
 ): T {
   $first = true;
   $result = null;
   foreach ($traversable as $value) {
     invariant(
       $first,
-      'Expected exactly one element%s.',
-      $traversable instanceof Container ? ' but got '.count($traversable) : '',
+      '%s',
+      $format_string === null
+        ? Str\format(
+          'Expected exactly one element%s.',
+          $traversable instanceof Container
+            ? ' but got '.count($traversable)
+            : '',
+        )
+        : \vsprintf($format_string, $format_args),
     );
     $result = $value;
     $first = false;
   }
-  invariant($first === false, 'Expected non-empty Traversable.');
+  invariant(
+    $first === false,
+    '%s',
+    $format_string === null
+      ? 'Expected non-empty Traversable.'
+      : \vsprintf($format_string, $format_args),
+  );
   /* HH_IGNORE_ERROR[4110] $first is false implies $result is set to T */
   return $result;
 }

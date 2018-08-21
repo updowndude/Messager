@@ -1,11 +1,12 @@
 <?hh // strict
 /*
- * Copyright (c) 2016, Fred Emmott
- * All rights reserved.
+ *  Copyright (c) 2016, Fred Emmott
+ *  Copyright (c) 2017-present, Facebook, Inc.
+ *  All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
+ *
  */
 
 namespace Facebook\TypeAssert;
@@ -21,7 +22,7 @@ final class IncorrectTypeException extends \Exception {
     private string $expected,
     private string $actual,
   ) {
-    $message = sprintf('Expected %s, got %s', $expected, $actual);
+    $message = \sprintf('Expected %s, got %s', $expected, $actual);
     parent::__construct($message);
   }
 
@@ -36,8 +37,8 @@ final class IncorrectTypeException extends \Exception {
   ): IncorrectTypeException {
     return new self(
       $trace,
-      sprintf("type '%s'", $expected_type),
-      sprintf("type '%s'", $actual_type),
+      \sprintf("type '%s'", $expected_type),
+      \sprintf("type '%s'", $actual_type),
     );
   }
 
@@ -46,9 +47,9 @@ final class IncorrectTypeException extends \Exception {
     string $expected_type,
     mixed $value,
   ): IncorrectTypeException {
-    $actual_type = gettype($value);
+    $actual_type = \gettype($value);
     if ($actual_type === 'object') {
-      $actual_type = get_class($value);
+      $actual_type = \get_class($value);
     }
     return self::withType($trace, $expected_type, $actual_type);
   }

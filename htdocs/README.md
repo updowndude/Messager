@@ -9,7 +9,7 @@ https://github.com/cytopia/devilbox
 https://trello.com/b/VgMHPm6r/messenger-upgrade
 
 # Start up
-docker-compose up
+docker-compose up httpd php mysql
 
 ## dependencies
     1. Node JS

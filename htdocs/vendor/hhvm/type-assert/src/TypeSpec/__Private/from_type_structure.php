@@ -1,11 +1,12 @@
 <?hh // strict
 /*
- * Copyright (c) 2017, Facebook Inc.
- * All rights reserved.
+ *  Copyright (c) 2016, Fred Emmott
+ *  Copyright (c) 2017-present, Facebook, Inc.
+ *  All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
+ *
  */
 
 namespace Facebook\TypeSpec\__Private;
@@ -17,9 +18,9 @@ use namespace Facebook\TypeSpec;
 use namespace Facebook\TypeAssert;
 
 function from_type_structure<T>(TypeStructure<T> $ts): TypeSpec<T> {
-  /* HH_IGNORE_ERROR[4108] 3.21 is not aware of optional_shape_field */
+  /* HH_FIXME[4108] 3.21 is not aware of optional_shape_field */
   if ($ts['optional_shape_field'] ?? false) {
-    /* HH_IGNORE_ERROR[4108] 3.21 is not aware of optional_shape_field */
+    /* HH_FIXME[4108] 3.21 is not aware of optional_shape_field */
     $ts['optional_shape_field'] = false;
     return new OptionalSpec(from_type_structure($ts));
   }
@@ -116,7 +117,7 @@ function from_type_structure<T>(TypeStructure<T> $ts): TypeSpec<T> {
           ($_k, $field_ts) ==> from_type_structure($field_ts),
           ($k, $_v) ==> $k,
         ),
-        /* HH_IGNORE_ERROR[4108] 3.21 is not aware of allows_unknown_fields */
+        /* HH_FIXME[4108] 3.21 is not aware of allows_unknown_fields */
         ($ts['allows_unknown_fields'] ?? !ShapeSpec::STRICT_SHAPES)
           ? UnknownFieldsMode::ALLOW
           : UnknownFieldsMode::DENY,
@@ -160,7 +161,7 @@ function from_type_structure<T>(TypeStructure<T> $ts): TypeSpec<T> {
           );
         default:
           if (
-            is_a(
+            \is_a(
               $classname,
               KeyedTraversable::class,
               /* strings = */ true,
@@ -177,7 +178,7 @@ function from_type_structure<T>(TypeStructure<T> $ts): TypeSpec<T> {
               ),
             );
           }
-          if (is_a($classname, Traversable::class, /* strings = */ true)) {
+          if (\is_a($classname, Traversable::class, /* strings = */ true)) {
             /* HH_IGNORE_ERROR[4110] unsafe generics */
             return new TraversableSpec(
               $classname,
@@ -198,7 +199,7 @@ function from_type_structure<T>(TypeStructure<T> $ts): TypeSpec<T> {
       throw new UnsupportedTypeException('OF_UNRESOLVED');
     default:
       $name = TypeStructureKind::getNames()[$ts['kind']] ??
-        var_export($ts['kind'], true);
+        \var_export($ts['kind'], true);
       throw new UnsupportedTypeException($name);
   }
 }

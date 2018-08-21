@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -21,11 +20,12 @@ namespace HH\Lib\C;
  *
  * For non-Awaitable Traversables, see `C\first`.
  */
+<<__Rx>>
 async function first_async<T>(
   Awaitable<Traversable<T>> $awaitable,
 ): Awaitable<?T> {
   $traversable = await $awaitable;
-  return namespace\first($traversable);
+  return first($traversable);
 }
 
 /**
@@ -34,9 +34,10 @@ async function first_async<T>(
  *
  * For non-Awaitable Traversables, see `C\firstx`.
  */
+<<__Rx>>
 async function firstx_async<T>(
   Awaitable<Traversable<T>> $awaitable,
 ): Awaitable<T> {
   $traversable = await $awaitable;
-  return namespace\firstx($traversable);
+  return firstx($traversable);
 }

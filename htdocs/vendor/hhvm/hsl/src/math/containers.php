@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -19,6 +18,7 @@ use namespace HH\Lib\{C, Math, Vec};
  * - For a known number of inputs, see `Math\maxva()`.
  * - To find the smallest number, see `Math\min()`.
  */
+<<__Rx>>
 function max<T as num>(
   Traversable<T> $numbers,
 ): ?T {
@@ -40,6 +40,7 @@ function max<T as num>(
  *
  * For numeric elements, see `Math\max()`.
  */
+<<__RxLocal>>
 function max_by<T>(
   Traversable<T> $traversable,
   (function(T): num) $num_func,
@@ -63,6 +64,7 @@ function max_by<T>(
  * - To find the maximum, see `Math\max()`.
  * - To find the minimum, see `Math\min()`.
  */
+<<__RxShallow>>
 function mean(Container<num> $numbers): ?float {
   $count = (float)C\count($numbers);
   if ($count === 0.0) {
@@ -80,6 +82,7 @@ function mean(Container<num> $numbers): ?float {
  *
  * To find the mean, see `Math\mean()`.
  */
+<<__RxShallow>>
 function median(Container<num> $numbers): ?float {
   $numbers = Vec\sort($numbers);
   $count = C\count($numbers);
@@ -102,6 +105,7 @@ function median(Container<num> $numbers): ?float {
  * - For a known number of inputs, see `Math\minva()`.
  * - To find the largest number, see `Math\max()`.
  */
+<<__Rx>>
 function min<T as num>(
   Traversable<T> $numbers,
 ): ?T {
@@ -123,6 +127,7 @@ function min<T as num>(
  *
  * For numeric elements, see `Math\min()`.
  */
+<<__RxLocal>>
 function min_by<T>(
   Traversable<T> $traversable,
   (function(T): num) $num_func,
@@ -144,6 +149,7 @@ function min_by<T>(
  *
  * For a float sum, see `Math\sum_float()`.
  */
+<<__Rx>>
 function sum(
   Traversable<int> $traversable,
 ): int {
@@ -159,6 +165,7 @@ function sum(
  *
  * For an integer sum, see `Math\sum()`.
  */
+<<__Rx>>
 function sum_float<T as num>(
   Traversable<T> $traversable,
 ): float {

@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -23,13 +22,14 @@ use namespace HH\Lib\_Private;
  *
  * Previously known as `substr` in PHP.
  */
+<<__RxLocal>>
 function slice(
   string $string,
   int $offset,
   ?int $length = null,
 ): string {
   invariant($length === null || $length >= 0, 'Expected non-negative length.');
-  $offset = _Private\validate_offset($offset, namespace\length($string));
+  $offset = _Private\validate_offset($offset, length($string));
   $result = $length === null
     ? \substr($string, $offset)
     : \substr($string, $offset, $length);
@@ -43,31 +43,33 @@ function slice(
  * Returns the string with the given prefix removed, or the string itself if
  * it doesn't start with the prefix.
  */
+<<__RxShallow>>
 function strip_prefix(
   string $string,
   string $prefix,
 ): string {
-  if ($prefix === '' || !namespace\starts_with($string, $prefix)) {
+  if ($prefix === '' || !starts_with($string, $prefix)) {
     return $string;
   }
-  return namespace\slice($string, namespace\length($prefix));
+  return slice($string, length($prefix));
 }
 
 /**
  * Returns the string with the given suffix removed, or the string itself if
  * it doesn't end with the suffix.
  */
+<<__RxShallow>>
 function strip_suffix(
   string $string,
   string $suffix,
 ): string {
-  if ($suffix === '' || !namespace\ends_with($string, $suffix)) {
+  if ($suffix === '' || !ends_with($string, $suffix)) {
     return $string;
   }
-  return namespace\slice(
+  return slice(
     $string,
     0,
-    namespace\length($string) - namespace\length($suffix),
+    length($string) - length($suffix),
   );
 }
 
@@ -80,6 +82,7 @@ function strip_suffix(
  * - To only strip from the left, see `Str\trim_left()`.
  * - To only strip from the right, see `Str\trim_right()`.
  */
+<<__RxLocal>>
 function trim(
   string $string,
   ?string $char_mask = null,
@@ -96,6 +99,7 @@ function trim(
  * - To strip from both ends, see `Str\trim()`.
  * - To only strip from the right, see `Str\trim_right()`
  */
+<<__RxLocal>>
 function trim_left(
   string $string,
   ?string $char_mask = null,
@@ -112,6 +116,7 @@ function trim_left(
  * - To strip from both ends, see `Str\trim`.
  * - To only strip from the left, see `Str\trim_left`.
  */
+<<__RxLocal>>
 function trim_right(
   string $string,
   ?string $char_mask = null,

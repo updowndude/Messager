@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -19,6 +18,7 @@ use namespace HH\Lib\_Private;
  *
  * For a case-insensitive comparison, see `Str\compare_ci()`.
  */
+<<__RxLocal>>
 function compare(
   string $string1,
   string $string2,
@@ -32,6 +32,7 @@ function compare(
  *
  * For a case-sensitive comparison, see `Str\compare()`.
  */
+<<__RxLocal>>
 function compare_ci(
   string $string1,
   string $string2,
@@ -50,16 +51,17 @@ function compare_ci(
  * - To get the position of the needle, see `Str\search()`.
  * - To search for the needle case-insensitively, see `Str\contains_ci()`.
  */
+<<__RxShallow>>
 function contains(
   string $haystack,
   string $needle,
   int $offset = 0,
 ): bool {
   if ($needle === '') {
-    _Private\validate_offset($offset, namespace\length($haystack));
+    _Private\validate_offset($offset, length($haystack));
     return true;
   }
-  return namespace\search($haystack, $needle, $offset) !== null;
+  return search($haystack, $needle, $offset) !== null;
 }
 
 /**
@@ -74,16 +76,17 @@ function contains(
  * - To search for the needle case-sensitively, see `Str\contains()`.
  * - To get the position of the needle case-insensitively, see `Str\search_ci()`.
  */
+<<__RxShallow>>
 function contains_ci(
   string $haystack,
   string $needle,
   int $offset = 0,
 ): bool {
   if ($needle === '') {
-    _Private\validate_offset($offset, namespace\length($haystack));
+    _Private\validate_offset($offset, length($haystack));
     return true;
   }
-  return namespace\search_ci($haystack, $needle, $offset) !== null;
+  return search_ci($haystack, $needle, $offset) !== null;
 }
 
 /**
@@ -91,13 +94,14 @@ function contains_ci(
  *
  * For a case-insensitive check, see `Str\ends_with_ci()`.
  */
+<<__RxLocal>>
 function ends_with(
   string $string,
   string $suffix,
 ): bool {
-  $suffix_length = namespace\length($suffix);
+  $suffix_length = length($suffix);
   return $suffix_length === 0 || (
-    namespace\length($string) >= $suffix_length &&
+    length($string) >= $suffix_length &&
     \substr_compare($string, $suffix, -$suffix_length, $suffix_length) === 0
   );
 }
@@ -107,13 +111,14 @@ function ends_with(
  *
  * For a case-sensitive check, see `Str\ends_with()`.
  */
+<<__RxLocal>>
 function ends_with_ci(
   string $string,
   string $suffix,
 ): bool {
-  $suffix_length = namespace\length($suffix);
+  $suffix_length = length($suffix);
   return $suffix_length === 0 || (
-    namespace\length($string) >= $suffix_length &&
+    length($string) >= $suffix_length &&
     \substr_compare(
       $string,
       $suffix,
@@ -127,6 +132,7 @@ function ends_with_ci(
 /**
  * Returns whether the input is null or the empty string.
  */
+<<__Rx>>
 function is_empty(
   ?string $string,
 ): bool {
@@ -136,6 +142,7 @@ function is_empty(
 /**
  * Returns the length of the given string, i.e. the number of bytes.
  */
+<<__RxLocal>>
 function length(
   string $string,
 ): int {
@@ -157,12 +164,13 @@ function length(
  *
  * Previously known in PHP as `strpos`.
  */
+<<__RxLocal>>
 function search(
   string $haystack,
   string $needle,
   int $offset = 0,
 ): ?int {
-  $offset = _Private\validate_offset($offset, namespace\length($haystack));
+  $offset = _Private\validate_offset($offset, length($haystack));
   $position = \strpos($haystack, $needle, $offset);
   if ($position === false) {
     return null;
@@ -185,12 +193,13 @@ function search(
  *
  * Previously known in PHP as `stripos`.
  */
+<<__RxLocal>>
 function search_ci(
   string $haystack,
   string $needle,
   int $offset = 0,
 ): ?int {
-  $offset = _Private\validate_offset($offset, namespace\length($haystack));
+  $offset = _Private\validate_offset($offset, length($haystack));
   $position = \stripos($haystack, $needle, $offset);
   if ($position === false) {
     return null;
@@ -212,12 +221,13 @@ function search_ci(
  *
  * Previously known in PHP as `strrpos`.
  */
+<<__RxLocal>>
 function search_last(
   string $haystack,
   string $needle,
   int $offset = 0,
 ): ?int {
-  $haystack_length = namespace\length($haystack);
+  $haystack_length = length($haystack);
   invariant(
     $offset >= -$haystack_length && $offset <= $haystack_length,
     'Offset is out-of-bounds.',
@@ -234,11 +244,12 @@ function search_last(
  *
  * For a case-insensitive check, see `Str\starts_with_ci()`.
  */
+<<__RxLocal>>
 function starts_with(
   string $string,
   string $prefix,
 ): bool {
-  return \strncmp($string, $prefix, namespace\length($prefix)) === 0;
+  return \strncmp($string, $prefix, length($prefix)) === 0;
 }
 
 /**
@@ -246,9 +257,10 @@ function starts_with(
  *
  * For a case-sensitive check, see `Str\starts_with()`.
  */
+<<__RxLocal>>
 function starts_with_ci(
   string $string,
   string $prefix,
 ): bool {
-  return \strncasecmp($string, $prefix, namespace\length($prefix)) === 0;
+  return \strncasecmp($string, $prefix, length($prefix)) === 0;
 }

@@ -1,11 +1,12 @@
 <?hh // strict
 /*
- * Copyright (c) 2017, Facebook Inc.
- * All rights reserved.
+ *  Copyright (c) 2016, Fred Emmott
+ *  Copyright (c) 2017-present, Facebook, Inc.
+ *  All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
+ *
  */
 
 namespace Facebook\TypeSpec\__Private;
@@ -39,7 +40,7 @@ final class SetSpec<Tv as arraykey, T as \ConstSet<Tv>> extends TypeSpec<T> {
     $map = $container ==>
       $container->map($v ==> $this->inner->withTrace($trace)->coerceType($v));
 
-    if (is_a($value, $this->what)) {
+    if (\is_a($value, $this->what)) {
       assert($value instanceof \ConstSet);
       /* HH_IGNORE_ERROR[4110] */
       return $map($value);
@@ -54,7 +55,7 @@ final class SetSpec<Tv as arraykey, T as \ConstSet<Tv>> extends TypeSpec<T> {
   }
 
   public function assertType(mixed $value): T {
-    if (!is_a($value, $this->what)) {
+    if (!\is_a($value, $this->what)) {
       throw IncorrectTypeException::withValue(
         $this->getTrace(),
         $this->what,

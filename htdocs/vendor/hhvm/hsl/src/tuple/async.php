@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -34,22 +33,24 @@ namespace HH\Lib\Tuple;
  * The function signature here is inaccurate as it can not be correctly
  * expressed in Hack; this function is special-cased in the typechecker.
  */
+<<__RxLocal>>
 async function from_async(?Awaitable<mixed> ...$awaitables): Awaitable<mixed> {
   /* The oss-enable/disable + vec/varray dance is because varray is banned
    * externally, and HH_IGNORE_ERROR/HH_FIXME/UNSAFE_EXPR can't be used to
    * bypass the ban. */
 
-  // @oss-disable: $awaitables = varray($awaitables);
+  // @oss-disable: $awaitables = \varray($awaitables);
   $awaitables = vec($awaitables); // @oss-enable
 
   foreach ($awaitables as $index => $value) {
     if ($value === null) {
+      /* HH_FIXME[4248] AwaitAllWaitHandle::fromVArray is like await */
       $awaitables[$index] = async { return null; };
     }
   }
 
-  /* HH_IGNORE_ERROR[4110] Okay to pass in Awaitable */
-  // @oss-disable: await AwaitAllWaitHandle::fromArray($awaitables);
+  /* HH_IGNORE_ERROR[4110] Hack can't infer that $awaitables has no nulls */
+  // @oss-disable: await AwaitAllWaitHandle::fromVArray($awaitables);
   await AwaitAllWaitHandle::fromVec($awaitables); // @oss-enable
   foreach ($awaitables as $index => $value) {
     /* HH_IGNORE_ERROR[4110] Reuse the existing array to reduce peak memory. */

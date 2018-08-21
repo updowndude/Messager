@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -15,6 +14,7 @@ namespace HH\Lib\Keyset;
  * Returns a 2-tuple containing keysets for which the given predicate returned
  * `true` and `false`, respectively.
  */
+<<__RxLocal>>
 function partition<Tv as arraykey>(
   Traversable<Tv> $traversable,
   (function(Tv): bool) $predicate,

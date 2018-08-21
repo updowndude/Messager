@@ -1,11 +1,12 @@
 <?hh // strict
 /*
- * Copyright (c) 2017, Facebook Inc.
- * All rights reserved.
+ *  Copyright (c) 2016, Fred Emmott
+ *  Copyright (c) 2017-present, Facebook, Inc.
+ *  All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
+ *
  */
 
 namespace Facebook\TypeSpec\__Private;
@@ -40,7 +41,7 @@ final class TraversableSpec<Tinner, T as Traversable<Tinner>>
         $valid_outer = $value instanceof Traversable;
         break;
       default:
-        $valid_outer = is_a($value, $this->outer);
+        $valid_outer = \is_a($value, $this->outer);
     }
 
     if (!$valid_outer) {
@@ -51,7 +52,7 @@ final class TraversableSpec<Tinner, T as Traversable<Tinner>>
     invariant(
       $value instanceof Traversable,
       'expected Traversable, got %s',
-      is_object($value) ? get_class($value) : gettype($value),
+      is_object($value) ? \get_class($value) : \gettype($value),
     );
 
     // Non-Container traversables may not be rewindable, e.g. generators, so
@@ -60,7 +61,7 @@ final class TraversableSpec<Tinner, T as Traversable<Tinner>>
     // Iterator::rewind() must exist, but may be a no-op, so we can't trust it.
     if (!$value instanceof Container) {
       throw new UnsupportedTypeException(
-        'non-Container Traversable '.get_class($value),
+        'non-Container Traversable '.\get_class($value),
       );
     }
 

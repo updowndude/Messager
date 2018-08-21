@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -16,6 +15,7 @@ namespace HH\Lib\Str;
  *
  * To split the string on a delimiter, see `Str\split()`.
  */
+<<__RxLocal>>
 function chunk(
   string $string,
   int $chunk_size = 1,
@@ -35,6 +35,7 @@ function chunk(
  *
  * Previously known as `explode` in PHP.
  */
+<<__RxLocal>>
 function split(
   string $string,
   string $delimiter,
@@ -42,12 +43,12 @@ function split(
 ): vec<string> {
   if ($delimiter === '') {
     if ($limit === null || $limit >= \strlen($string)) {
-      return namespace\chunk($string);
+      return chunk($string);
     } else if ($limit === 1) {
       return vec[$string];
     } else {
       invariant($limit > 1, 'Expected positive limit.');
-      $result = namespace\chunk(\substr($string, 0, $limit - 1));
+      $result = chunk(\substr($string, 0, $limit - 1));
       $result[] = \substr($string, $limit - 1);
       return $result;
     }

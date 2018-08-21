@@ -1,11 +1,12 @@
 <?hh // strict
 /*
- * Copyright (c) 2017, Facebook Inc.
- * All rights reserved.
+ *  Copyright (c) 2016, Fred Emmott
+ *  Copyright (c) 2017-present, Facebook, Inc.
+ *  All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
+ *
  */
 
 namespace Facebook\TypeSpec\__Private;
@@ -20,7 +21,7 @@ final class IntSpec extends TypeSpec<int> {
     }
     if ($value instanceof \Stringish) {
       $str = (string)$value;
-      if ($str !== '' && ctype_digit($str)) {
+      if ($str !== '' && \ctype_digit($str)) {
         return (int)$str;
       }
     }

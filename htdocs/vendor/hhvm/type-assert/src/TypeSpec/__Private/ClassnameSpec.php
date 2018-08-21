@@ -1,11 +1,12 @@
 <?hh // strict
 /*
- * Copyright (c) 2017, Facebook Inc.
- * All rights reserved.
+ *  Copyright (c) 2016, Fred Emmott
+ *  Copyright (c) 2017-present, Facebook, Inc.
+ *  All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
+ *
  */
 
 namespace Facebook\TypeSpec\__Private;
@@ -20,7 +21,7 @@ final class ClassnameSpec<Tinner, T as classname<Tinner>> extends TypeSpec<T> {
   }
 
   public function assertType(mixed $value): T {
-    if (is_string($value) && is_a($value, $this->what, /* strings = */ true)) {
+    if (is_string($value) && \is_a($value, $this->what, /* strings = */ true)) {
       /* HH_IGNORE_ERROR[4110] is_a is not understood by Hack */
       return $value;
     }

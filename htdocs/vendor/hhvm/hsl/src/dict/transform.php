@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -16,6 +15,7 @@ namespace HH\Lib\Dict;
  * size. If the original dict doesn't divide evenly, the final chunk will be
  * smaller.
  */
+<<__RxLocal>>
 function chunk<Tk as arraykey, Tv>(
   KeyedTraversable<Tk, Tv> $traversable,
   int $size,
@@ -37,6 +37,7 @@ function chunk<Tk as arraykey, Tv>(
  * Returns a new dict mapping each value to the number of times it appears
  * in the given Traversable.
  */
+<<__Rx>>
 function count_values<Tv as arraykey>(
   Traversable<Tv> $values,
 ): dict<Tv, int> {
@@ -54,6 +55,7 @@ function count_values<Tv as arraykey>(
  *
  * For a fixed number of KeyedTraversables, see `Dict\merge()`.
  */
+<<__Rx>>
 function flatten<Tk as arraykey, Tv>(
   Traversable<KeyedTraversable<Tk, Tv>> $traversables,
 ): dict<Tk, Tv> {
@@ -69,6 +71,7 @@ function flatten<Tk as arraykey, Tv>(
 /**
  * Returns a new dict where all the given keys map to the given value.
  */
+<<__Rx>>
 function fill_keys<Tk as arraykey, Tv>(
   Traversable<Tk> $keys,
   Tv $value,
@@ -85,6 +88,7 @@ function fill_keys<Tk as arraykey, Tv>(
  * and vice-versa. In case of duplicate values, later keys overwrite the
  * previous ones.
  */
+<<__Rx>>
 function flip<Tk, Tv as arraykey>(
   KeyedTraversable<Tk, Tv> $traversable,
 ): dict<Tv, Tk> {
@@ -101,8 +105,9 @@ function flip<Tk, Tv as arraykey>(
  *
  * - To use an async function, see `Dict\from_keys_async()`.
  * - To create a dict from values, see `Dict\from_values()`.
- * - To create a dict from key/value pairs, see `Dict\from_entries()`.
+ * - To create a dict from key/value tuples, see `Dict\from_entries()`.
  */
+<<__RxLocal>>
 function from_keys<Tk as arraykey, Tv>(
   Traversable<Tk> $keys,
   (function(Tk): Tv) $value_func,
@@ -123,7 +128,10 @@ function from_keys<Tk as arraykey, Tv>(
  *
  * - To create a dict from keys, see `Dict\from_keys()`.
  * - To create a dict from values, see `Dict\from_values()`.
+ *
+ * Also known as `unzip` or `fromItems` in other implementations.
  */
+<<__Rx>>
 function from_entries<Tk as arraykey, Tv>(
   Traversable<(Tk, Tv)> $entries,
 ): dict<Tk, Tv> {
@@ -142,8 +150,9 @@ function from_entries<Tk as arraykey, Tv>(
  * overwrite the previous ones.
  *
  * - To create a dict from keys, see `Dict\from_keys()`.
- * - To create a dict from key/value pairs, see `Dict\from_entries()`.
+ * - To create a dict from key/value tuples, see `Dict\from_entries()`.
  */
+<<__RxLocal>>
 function from_values<Tk as arraykey, Tv>(
   Traversable<Tv> $values,
   (function(Tv): Tk) $key_func,
@@ -162,6 +171,7 @@ function from_values<Tk as arraykey, Tv>(
   *
   * If a value produces a null key, it's omitted from the result.
   */
+<<__RxLocal>>
 function group_by<Tk as arraykey, Tv>(
   Traversable<Tv> $values,
   (function(Tv): ?Tk) $key_func,
@@ -186,6 +196,7 @@ function group_by<Tk as arraykey, Tv>(
  *
  * To use an async function, see `Dict\map_async()`.
  */
+<<__RxLocal>>
 function map<Tk as arraykey, Tv1, Tv2>(
   KeyedTraversable<Tk, Tv1> $traversable,
   (function(Tv1): Tv2) $value_func,
@@ -202,6 +213,7 @@ function map<Tk as arraykey, Tv1, Tv2>(
  * function on the original key. In the case of duplicate keys, later values
  * will overwrite the previous ones.
  */
+<<__RxLocal>>
 function map_keys<Tk1, Tk2 as arraykey, Tv>(
   KeyedTraversable<Tk1, Tv> $traversable,
   (function(Tk1): Tk2) $key_func,
@@ -217,6 +229,7 @@ function map_keys<Tk1, Tk2 as arraykey, Tv>(
  * Returns a new dict where each value is the result of calling the given
  * function on the original value and key.
  */
+<<__RxLocal>>
 function map_with_key<Tk as arraykey, Tv1, Tv2>(
   KeyedTraversable<Tk, Tv1> $traversable,
   (function(Tk, Tv1): Tv2) $value_func,
@@ -234,6 +247,7 @@ function map_with_key<Tk as arraykey, Tv1, Tv2>(
  *  - keys are the result of calling `$key_func` on the original value.
  * In the case of duplicate keys, later values will overwrite the previous ones.
  */
+<<__RxLocal>>
 function pull<Tk as arraykey, Tv1, Tv2>(
   Traversable<Tv1> $traversable,
   (function(Tv1): Tv2) $value_func,
@@ -252,6 +266,7 @@ function pull<Tk as arraykey, Tv1, Tv2>(
  *  - keys are the result of calling `$key_func` on the original value/key.
  * In the case of duplicate keys, later values will overwrite the previous ones.
  */
+<<__RxLocal>>
 function pull_with_key<Tk1, Tk2 as arraykey, Tv1, Tv2>(
   KeyedTraversable<Tk1, Tv1> $traversable,
   (function(Tk1, Tv1): Tv2) $value_func,

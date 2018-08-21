@@ -1,5 +1,6 @@
 {
   "require": {
-    "facebook/xhp-lib": "2.x"
+    "facebook/xhp-lib": "2.6",
+    "facebook/hack-router": "1.0.0rc8"
   }
 }

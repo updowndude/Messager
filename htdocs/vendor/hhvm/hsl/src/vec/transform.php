@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -16,6 +15,7 @@ namespace HH\Lib\Vec;
  * size. If the original vec doesn't divide evenly, the final chunk will be
  * smaller.
  */
+<<__RxLocal>>
 function chunk<Tv>(
   Traversable<Tv> $traversable,
   int $size,
@@ -36,6 +36,7 @@ function chunk<Tv>(
 /**
  * Returns a new vec of size `$size` where all the values are `$value`.
  */
+<<__RxLocal>>
 function fill<Tv>(
   int $size,
   Tv $value,
@@ -50,6 +51,7 @@ function fill<Tv>(
  *
  * For a fixed number of Traversables, see `Vec\concat()`.
  */
+<<__Rx>>
 function flatten<Tv>(
   Traversable<Traversable<Tv>> $traversables,
 ): vec<Tv> {
@@ -68,6 +70,7 @@ function flatten<Tv>(
  *
  * For async functions, see `Vec\map_async()`.
  */
+<<__RxLocal>>
 function map<Tv1, Tv2>(
   Traversable<Tv1> $traversable,
   (function(Tv1): Tv2) $value_func,
@@ -83,6 +86,7 @@ function map<Tv1, Tv2>(
  * Returns a new vec where each value is the result of calling the given
  * function on the original key and value.
  */
+<<__RxLocal>>
 function map_with_key<Tk, Tv1, Tv2>(
   KeyedTraversable<Tk, Tv1> $traversable,
   (function(Tk, Tv1): Tv2) $value_func,

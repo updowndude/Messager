@@ -1,13 +1,15 @@
 <?hh // strict
 /*
- *  Copyright (c) 2015, Facebook, Inc.
+ *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
+
+use type Facebook\TypeAssert\IncorrectTypeException;
+use namespace Facebook\TypeSpec;
 
 enum XHPChildrenDeclarationType: int {
   NO_CHILDREN = 0;
@@ -46,14 +48,19 @@ class ReflectionXHPChildrenDeclaration {
 
   <<__Memoize>>
   public function getExpression(): ReflectionXHPChildrenExpression {
-    $data = $this->data;
-    invariant(
-      is_array($data),
-      "Tried to get child expression for XHP class %s, but it does not ".
-      "have an expression.",
-      :xhp::class2element(get_class($this->context)),
+    try {
+      $data = TypeSpec\dict_like_array(TypeSpec\int(), TypeSpec\mixed())
+        ->assertType($this->data);
+      return new ReflectionXHPChildrenExpression($this->context, $data);
+    } catch (IncorrectTypeException $_) {
+      // handled below
+    }
+
+    throw new Exception (
+      "Tried to get child expression for XHP class ".
+      :xhp::class2element(get_class($this->context)).
+      ", but it does not have an expressions."
     );
-    return new ReflectionXHPChildrenExpression($this->context, $data);
   }
 
   public function __toString(): string {
@@ -89,17 +96,20 @@ class ReflectionXHPChildrenExpression {
       'Only disjunctions and sequences have two sub-expressions - in %s',
       :xhp::class2element(get_class($this->context)),
     );
-    $sub_expr_1 = $this->data[1];
-    $sub_expr_2 = $this->data[2];
-    invariant(
-      is_array($sub_expr_1) && is_array($sub_expr_2),
-      'Data is not subexpressions - in %s',
-      $this->context,
-    );
-    return tuple(
-      new ReflectionXHPChildrenExpression($this->context, $sub_expr_1),
-      new ReflectionXHPChildrenExpression($this->context, $sub_expr_2),
-    );
+    try {
+      $sub_expr_1 = TypeSpec\dict_like_array(TypeSpec\int(), TypeSpec\mixed())
+        ->assertType($this->data[1]);
+      $sub_expr_2 = TypeSpec\dict_like_array(TypeSpec\int(), TypeSpec\mixed())
+        ->assertType($this->data[2]);
+      return tuple(
+        new ReflectionXHPChildrenExpression($this->context, $sub_expr_1),
+        new ReflectionXHPChildrenExpression($this->context, $sub_expr_2),
+      );
+    } catch (IncorrectTypeException $_) {
+      // handled below
+    }
+
+    throw new Exception('Data is not subexpressions - in '.$this->context);
   }
 
   <<__Memoize>>
@@ -136,13 +146,19 @@ class ReflectionXHPChildrenExpression {
       $this->context,
     );
     $data = $this->data[2];
-    invariant(
-      is_array($data),
-      'Expected a sub-expression, got a %s - in %s',
-      is_object($data) ? get_class($data) : gettype($data),
-      $this->context,
+    try {
+      $data = TypeSpec\dict_like_array(TypeSpec\int(), TypeSpec\mixed())
+        ->assertType($this->data[2]);
+      return new ReflectionXHPChildrenExpression($this->context, $data);
+    } catch (IncorrectTypeException $_) {
+      // handled below
+    }
+
+    throw new Exception (
+      'Expected a sub-expression, got a '.
+      is_object($data) ? get_class($data) : gettype($data).
+      ' - in '. $this->context
     );
-    return new ReflectionXHPChildrenExpression($this->context, $data);
   }
 
   public function __toString(): string {

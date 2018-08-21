@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -13,6 +12,7 @@ namespace HH\Lib\Dict;
 
 use namespace HH\Lib\C;
 
+<<__RxLocal>>
 async function from_async<Tk as arraykey, Tv>(
   KeyedTraversable<Tk, Awaitable<Tv>> $awaitables,
 ): Awaitable<dict<Tk, Tv>> {
@@ -22,6 +22,7 @@ async function from_async<Tk as arraykey, Tv>(
   await AwaitAllWaitHandle::fromDict($awaitables);
   foreach ($awaitables as $key => $value) {
     /* HH_IGNORE_ERROR[4110] Reuse the existing dict to reduce peak memory. */
+    /* HH_FIXME[4248] unawaited Awaitable type value in reactive code */
     $awaitables[$key] = \HH\Asio\result($value);
   }
   /* HH_IGNORE_ERROR[4110] Reuse the existing dict to reduce peak memory. */
@@ -34,6 +35,7 @@ async function from_async<Tk as arraykey, Tv>(
  *
  * For non-async functions, see `Dict\from_keys()`.
  */
+<<__RxLocal>>
 async function from_keys_async<Tk as arraykey, Tv>(
   Traversable<Tk> $keys,
   (function(Tk): Awaitable<Tv>) $async_func,
@@ -41,6 +43,7 @@ async function from_keys_async<Tk as arraykey, Tv>(
   $awaitables = dict[];
   foreach ($keys as $key) {
     if (!C\contains_key($awaitables, $key)) {
+      /* HH_FIXME[4248] AwaitAllWaitHandle::fromDict is like await */
       $awaitables[$key] = $async_func($key);
     }
   }
@@ -51,6 +54,7 @@ async function from_keys_async<Tk as arraykey, Tv>(
   await AwaitAllWaitHandle::fromDict($awaitables);
   foreach ($awaitables as $key => $value) {
     /* HH_IGNORE_ERROR[4110] Reuse the existing dict to reduce peak memory. */
+    /* HH_FIXME[4248] unawaited Awaitable type value in reactive code */
     $awaitables[$key] = \HH\Asio\result($value);
   }
   /* HH_IGNORE_ERROR[4110] Reuse the existing dict to reduce peak memory. */
@@ -63,11 +67,12 @@ async function from_keys_async<Tk as arraykey, Tv>(
  *
  * For non-async predicates, see `Dict\filter()`.
  */
+<<__RxLocal>>
 async function filter_async<Tk as arraykey, Tv>(
   KeyedContainer<Tk, Tv> $traversable,
   (function(Tv): Awaitable<bool>) $value_predicate,
 ): Awaitable<dict<Tk, Tv>> {
-  $tests = await namespace\map_async($traversable, $value_predicate);
+  $tests = await map_async($traversable, $value_predicate);
   $result = dict[];
   foreach ($traversable as $key => $value) {
     if ($tests[$key]) {
@@ -82,6 +87,7 @@ async function filter_async<Tk as arraykey, Tv>(
  *
  * For non-async filters with key, see `Dict\filter_with_key()`.
  */
+<<__RxLocal>>
 async function filter_with_key_async<Tk as arraykey, Tv>(
   KeyedContainer<Tk, Tv> $traversable,
   (function(Tk, Tv): Awaitable<bool>) $predicate,
@@ -104,12 +110,14 @@ async function filter_with_key_async<Tk as arraykey, Tv>(
  *
  * For non-async functions, see `Dict\map()`.
  */
+<<__RxLocal>>
 async function map_async<Tk as arraykey, Tv1, Tv2>(
   KeyedTraversable<Tk, Tv1> $traversable,
   (function(Tv1): Awaitable<Tv2>) $value_func,
 ): Awaitable<dict<Tk, Tv2>> {
   $awaitables = dict[];
   foreach ($traversable as $key => $value) {
+    /* HH_FIXME[4248] AwaitAllWaitHandle::fromDict is like await */
     $awaitables[$key] = $value_func($value);
   }
   /* HH_IGNORE_ERROR[4135] Unset local variable to reduce peak memory. */
@@ -119,6 +127,7 @@ async function map_async<Tk as arraykey, Tv1, Tv2>(
   await AwaitAllWaitHandle::fromDict($awaitables);
   foreach ($awaitables as $key => $value) {
     /* HH_IGNORE_ERROR[4110] Reuse the existing dict to reduce peak memory. */
+    /* HH_FIXME[4248] unawaited Awaitable type value in reactive code */
     $awaitables[$key] = \HH\Asio\result($value);
   }
   /* HH_IGNORE_ERROR[4110] Reuse the existing dict to reduce peak memory. */

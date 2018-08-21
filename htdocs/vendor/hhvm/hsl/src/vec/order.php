@@ -3,9 +3,8 @@
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
  *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  This source code is licensed under the MIT license found in the
+ *  LICENSE file in the root directory of this source tree.
  *
  */
 
@@ -19,6 +18,7 @@ use namespace HH\Lib\{C, Dict, Math, Str};
  * default. If `$start > $end`, it returns a descending range instead of
  * an empty one.
  */
+<<__RxLocal>>
 function range<Tv as num>(
   Tv $start,
   Tv $end,
@@ -36,6 +36,7 @@ function range<Tv as num>(
  * Returns a new vec with the values of the given Traversable in reversed
  * order.
  */
+<<__RxShallow>>
 function reverse<Tv>(
   Traversable<Tv> $traversable,
 ): vec<Tv> {
@@ -69,6 +70,7 @@ function shuffle<Tv>(
  *
  * To sort by some computable property of each value, see `Vec\sort_by()`.
  */
+<<__RxLocal>>
 function sort<Tv>(
   Traversable<Tv> $traversable,
   ?(function(Tv, Tv): int) $comparator = null,
@@ -90,6 +92,7 @@ function sort<Tv>(
  *
  * To sort by the values of the Traversable, see `Vec\sort()`.
  */
+<<__RxLocal>>
 function sort_by<Tv, Ts>(
   Traversable<Tv> $traversable,
   (function(Tv): Ts) $scalar_func,
@@ -102,5 +105,5 @@ function sort_by<Tv, Ts>(
   } else {
     \asort(&$order_by);
   }
-  return namespace\map_with_key($order_by, ($k, $v) ==> $vec[$k]);
+  return map_with_key($order_by, ($k, $v) ==> $vec[$k]);
 }
