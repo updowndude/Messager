@@ -1,4 +1,4 @@
-<?hh 
+<?hh
   require('vendor/hh_autoload.php');
   require_once('php/view/indexPlaceholder.php');
   require('php/controller/defense.php');
@@ -21,7 +21,7 @@
     {$contentIndex}
   </main>
 <!-- add the recouse for nav click -->
-<script src="public/dist/bootstrap-native-v4.js" type="text/javascript"></script>
+<script src="public/dist/bootstrap-native.js" type="text/javascript"></script>
 <script src="public/dist/rx.js" type="text/javascript"></script>
 <script src="public/dist/indexFunction.js" type="module"></script>
 <script src="public/dist/main.js" type="module"></script>

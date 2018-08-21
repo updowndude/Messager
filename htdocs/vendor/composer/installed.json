@@ -36,7 +36,8 @@
                 "email": "fred@fredemmott.co.uk"
             }
         ],
-        "description": "Suppress HHVM's automatic conversion of typechecker errors to fatals."
+        "description": "Suppress HHVM's automatic conversion of typechecker errors to fatals.",
+        "abandoned": true
     },
     {
         "name": "hhvm/hhvm-autoload",

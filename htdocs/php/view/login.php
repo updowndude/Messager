@@ -1,5 +1,5 @@
 <?hh
-!isset($_SESSION) ? session_start() : null;
+  !isset($_SESSION) ? session_start() : null;
 
   function loginForm() {
     $token = makeToken();

@@ -1,15 +1,10 @@
-<?php
+<?hh
   function builder() {
     require('../model/db.php');
 
-    $query = "select * from groups";
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $newFeedback = $statement -> fetchAll(PDO::FETCH_ASSOC);
-    $statement->closeCursor();
+    $newFeedback = handleSQL('select * from groups', [], [], 1);
 
     $file = fopen('../../json/groups.json', 'w');
     fwrite($file, json_encode($newFeedback));
     fclose($file);
   }
-?>

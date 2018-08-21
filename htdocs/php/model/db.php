@@ -10,7 +10,7 @@ function getAccess() {
     // 10/27/16
     // check to se it works
     try {
-        $db = new PDO("mysql:host=localhost;dbname=cwinkebt_Messenger", 'root', '');
+        $db = new PDO("mysql:host=172.16.238.12;dbname=cwinkebt_Messenger", 'root', '');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $db;
     } catch (PDOException $err) {
@@ -44,7 +44,7 @@ function handleSQL($strQuer="",$aryStatments=[], $aryValues=[], $intGetValues = 
     $db = getAccess();
     // can't connect to the database
     if(is_null($db) == true) {
-      echo   "<strong>{$_SESSION['errorMessage']}</strong> <hr>  contact Ink-Smart at (608) 313-0506 <hr>";
+      echo   "<strong>{$_SESSION['errorMessage']}</strong> <hr>  contact Correy Winke at cwinke3@gmail.com <hr>";
     } else {
       if((gettype($strQuer) == "string") && (gettype($intGetValues) == "integer") && (gettype($aryValues) == "array") && (gettype($aryStatments) == "array")) {
           if ((count($aryStatments) == count($aryValues)) && (strlen($strQuer) != 0)) {
@@ -53,8 +53,7 @@ function handleSQL($strQuer="",$aryStatments=[], $aryValues=[], $intGetValues = 
                   // bad connection
                   $_SESSION['errorMessage'] = "Sorry prepare failed";
                   // action value didn't match
-                header('Location: error');
-                exit();
+                exit("Bad values");
               }
               for($lcv = 0;$lcv < count($aryStatments);$lcv++){
                   $bind_results = $statement->bindValue($aryStatments[$lcv], $aryValues[$lcv]);
@@ -62,8 +61,7 @@ function handleSQL($strQuer="",$aryStatments=[], $aryValues=[], $intGetValues = 
                       // bad connection
                       $_SESSION['errorMessage'] = "Sorry can't bind these value";
                       // action value didn't match
-                    header('Location: error');
-                    exit();
+                    exit("Bad bind values");
                   }
               }
               try {
@@ -72,15 +70,13 @@ function handleSQL($strQuer="",$aryStatments=[], $aryValues=[], $intGetValues = 
                       // bad connection
                       $_SESSION['errorMessage'] = "Bad execcution";
                       // action value didn't match
-                        header('Location: error');
-                        exit();
+                        exit("Bad execute");
                   }
               } catch (Exception $e)  {
                   // bad connection
                   $_SESSION['errorMessage'] = $e;
                   // action value didn't match
-                    header('Location: error');
-                    exit();
+                    exit($e);
               }
               if ($intGetValues == 0){
                   $newFeedback = $statement -> fetch();
@@ -95,15 +91,13 @@ function handleSQL($strQuer="",$aryStatments=[], $aryValues=[], $intGetValues = 
               // bad connection
               $_SESSION['errorMessage'] = "Something happen";
               // action value didn't match
-            header('Location: error');
-            exit();
+            exit("Something happen");
           }
       } else {
           // bad connection
           $_SESSION['errorMessage'] = "Something happen";
           // action value didn't match
-        header('Location: error');
-        exit();
+        exit("Something happen");
       }
     }
 }

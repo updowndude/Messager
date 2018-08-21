@@ -1,18 +1,12 @@
-<?php
+<?hh
   function footerData() {
-    return "
-        <!-- by Correy WInke -->
-    <!-- 11/3/16 -->
-    <!-- page footer -->
+    return (
     <footer>
       <p> Correy Winke, &copy; 2016.</p>
+      <script src="../../public/dist/bootstrap-native.js" type="text/javascript"></script>
+      <script src="../../public/dist/rx.js" type="text/javascript"></script>
+      <script src="../../public/dist/indexFunction.js" type="module"></script>
+      <script src="../../public/dist/main.js" type="module"></script>
     </footer>
-    </main>
-    <!-- add the recouse for nav click -->
-    <script src=\"../../public/dist/hello.dart.js\" type=\"text/javascript\"></script>
-    <script type=\"application/dart\" src=\"../../dart/hello.dart\"></script>
-    </body>
-    </html>
-    ";
+    );
   }
-?>

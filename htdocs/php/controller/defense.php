@@ -32,7 +32,7 @@ function makeToken() {
         $_SESSION['token'] = $token;
         $_SESSION['tokenTime'] = time();
         // makes the new token
-        return $toke;
+        return $token;
     } else {
         // display the token with the current value
         return $_SESSION['token'];

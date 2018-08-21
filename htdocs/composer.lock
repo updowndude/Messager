@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9739e3a4c1b122a564f62c425f45a16",
+    "content-hash": "1dccfe800ad36507c1831f7e619393c3",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -126,6 +126,7 @@
                 }
             ],
             "description": "Suppress HHVM's automatic conversion of typechecker errors to fatals.",
+            "abandoned": true,
             "time": "2017-05-02T03:07:37+00:00"
         },
         {
