@@ -1,6 +1,6 @@
 <?hh
   function builder() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $newFeedback = handleSQL('select * from groups', [], [], 1);
 

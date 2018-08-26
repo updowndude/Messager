@@ -1,6 +1,6 @@
 <?hh
   function userImageSrc() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $curUser = handleSQL("select * from person where ((fname = '{$_SESSION['fName']}') && (lname = '{$_SESSION['lName']}') && (birthday = '{$_SESSION['bDate']}'))",[],[],0);
    
@@ -37,7 +37,7 @@
                </tbody>
              </table>
            </div>
-            <form action="../controller/action.php" method="post" enctype="multipart/form-data">
+            <form action="php/controller/action.php" method="post" enctype="multipart/form-data">
               <input type="hidden" name="action" value="uploadUserImg"/>
               <div class="form-group">
                 <label>Upload Picture</label>

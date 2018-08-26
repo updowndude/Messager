@@ -1,17 +1,17 @@
 <?hh
-  require('../../vendor/hh_autoload.php');
-  require_once('head.php');
-  require_once('footer.php');
-  require_once('adim.php');
-  require_once('about.php');
-  require_once('feedback.php');
-  require_once('groupsContent.php');
-  require_once('buildJson.php');
-  require_once('carousel.php');
+  require('vendor/hh_autoload.php');
+  require_once('php/view/head.php');
+  require_once('php/view/footer.php');
+  require_once('php/view/adim.php');
+  require_once('php/view/about.php');
+  require_once('php/view/feedback.php');
+  require_once('php/view/groupsContent.php');
+  require_once('php/view/buildJson.php');
+  require_once('php/view/carousel.php');
   require('user.php');
 
   function mainPage() {
-    require('../controller/defense.php');
+    require('php/controller/defense.php');
     builder();
     $token = makeToken();
     $head = headData("Groups");
@@ -80,7 +80,7 @@
                     <div class="well">
                       <div class="row">
                           <div class="col-xs-2 col-sm-1">
-                            <form action="../controller/action.php" method="post">
+                            <form action="php/controller/action.php" method="post">
                                 <input type="hidden" name="action" value="logOut"/>
                                 <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-log-out"></span></button>
                                 <input type="hidden" name="token" value={$token} />
@@ -134,5 +134,3 @@
       return "Sorry something when wrong";
     }
   }
-
-  echo mainPage();

@@ -92,6 +92,87 @@
         "notification-url": "https://packagist.org/downloads/"
     },
     {
+        "name": "bramus/router",
+        "version": "1.3",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bramus/router.git",
+            "reference": "1d67c5e50f979c8137dcf3cadcb06cd3c5cfe330"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bramus/router/zipball/1d67c5e50f979c8137dcf3cadcb06cd3c5cfe330",
+            "reference": "1d67c5e50f979c8137dcf3cadcb06cd3c5cfe330",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/php-code-coverage": "^2.1.0",
+            "phpunit/phpunit": "4.8.*"
+        },
+        "time": "2017-12-21T20:37:23+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Bramus": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bram(us) Van Damme",
+                "email": "bramus@bram.us",
+                "homepage": "http://www.bram.us"
+            }
+        ],
+        "description": "A lightweight and simple object oriented PHP Router",
+        "homepage": "https://github.com/bramus/router",
+        "keywords": [
+            "router",
+            "routing"
+        ]
+    },
+    {
+        "name": "hhvm/hsl",
+        "version": "v3.27.2",
+        "version_normalized": "3.27.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hhvm/hsl.git",
+            "reference": "c3d4725367c131c80dc65b765f9fdd6075475e63"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/hhvm/hsl/zipball/c3d4725367c131c80dc65b765f9fdd6075475e63",
+            "reference": "c3d4725367c131c80dc65b765f9fdd6075475e63",
+            "shasum": ""
+        },
+        "require": {
+            "hhvm": "^3.27.0",
+            "hhvm/hhvm-autoload": "^1.4"
+        },
+        "require-dev": {
+            "91carriage/phpunit-hhi": "^5.7",
+            "facebook/fbexpect": "^1.0.0",
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2018-08-08T16:18:28+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "The Hack Standard Library"
+    },
+    {
         "name": "hhvm/type-assert",
         "version": "v3.2.2",
         "version_normalized": "3.2.2.0",
@@ -128,39 +209,6 @@
             "TypeAssert",
             "hack"
         ]
-    },
-    {
-        "name": "hhvm/hsl",
-        "version": "v3.27.2",
-        "version_normalized": "3.27.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/hhvm/hsl.git",
-            "reference": "c3d4725367c131c80dc65b765f9fdd6075475e63"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/hhvm/hsl/zipball/c3d4725367c131c80dc65b765f9fdd6075475e63",
-            "reference": "c3d4725367c131c80dc65b765f9fdd6075475e63",
-            "shasum": ""
-        },
-        "require": {
-            "hhvm": "^3.27.0",
-            "hhvm/hhvm-autoload": "^1.4"
-        },
-        "require-dev": {
-            "91carriage/phpunit-hhi": "^5.7",
-            "facebook/fbexpect": "^1.0.0",
-            "phpunit/phpunit": "^5.7"
-        },
-        "time": "2018-08-08T16:18:28+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "The Hack Standard Library"
     },
     {
         "name": "facebook/xhp-lib",
@@ -340,53 +388,6 @@
         ],
         "description": "Fast request router for PHP",
         "keywords": [
-            "router",
-            "routing"
-        ]
-    },
-    {
-        "name": "facebook/hack-router",
-        "version": "v1.0.0rc8",
-        "version_normalized": "1.0.0.0-RC8",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/hhvm/hack-router.git",
-            "reference": "d9cf3ef612e4218d14a2651517cbacc0352532e6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/hhvm/hack-router/zipball/d9cf3ef612e4218d14a2651517cbacc0352532e6",
-            "reference": "d9cf3ef612e4218d14a2651517cbacc0352532e6",
-            "shasum": ""
-        },
-        "require": {
-            "hack-psr/psr7-http-message-hhi": "^0.2.0|^1.0.0",
-            "nikic/fast-route": "^1.0.0 || >0.7 <1.0"
-        },
-        "require-dev": {
-            "91carriage/phpunit-hhi": "^5.1",
-            "phpunit/phpunit": "^5.1",
-            "zendframework/zend-diactoros": "^1.3"
-        },
-        "time": "2017-02-15T01:38:10+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "description": "URI routing for Hack",
-        "homepage": "https://github.com/hhvm/hack-router",
-        "keywords": [
-            "hack",
-            "hhvm",
             "router",
             "routing"
         ]

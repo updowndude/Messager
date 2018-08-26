@@ -1,5 +1,5 @@
 <?hh
-  require('../../vendor/hh_autoload.php');
+  require('vendor/hh_autoload.php');
 
   !isset($_SESSION) ? session_start() : null;
 
@@ -29,13 +29,13 @@
   }
 
   function adimDelete($message, $posted, $row) {
-    // require('../controller/defense.php');
+    // require('php/controller/defense.php');
 
     if(isset($_SESSION['adim']) == true) {
       if($_SESSION['adim'] == 'cVU7k1hstJ') {
         $token = makeToken2();
 
-        return (<form action="../controller/action.php" method="post">
+        return (<form action="php/controller/action.php" method="post">
             <input type="hidden" name="action" value="delatePost"/>
             <input type="hidden" name="postedPG" value={$posted}/>
             <input type="hidden" name="messagePG" value={$message}/>
@@ -51,7 +51,7 @@
   }
 
   function buildPosts() {
-    require('../model/db.php');
+    require('php/model/db.php');
     require('user.php');
 
     $strPosts = [];
@@ -111,7 +111,7 @@
   }
 
   function findMembers() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $strPosts = [];
 
@@ -128,7 +128,7 @@
   }
 
   function makeFormHelper() {
-    require('../controller/defense.php');
+    require('php/controller/defense.php');
     $token = makeToken();
 
     return (<div id="addNewPost" class="tab-pane fade">
@@ -137,7 +137,7 @@
             <p class="text-warning">Add a new post</p>
           </div>
           <div class="panel-body">
-            <form id="postForm" action="../controller/action.php" method="post" enctype="multipart/form-data">
+            <form id="postForm" action="php/controller/action.php" method="post" enctype="multipart/form-data">
               <input type="hidden" name="action" value="addPost"/>
               <div class="form-group">
                 <label for="message">Message</label>
@@ -156,7 +156,7 @@
   }
 
   function checkAdim() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $aGroups = handleSQL("select *
     from (person inner join poeple_group on person.person_id = poeple_group.person_id) join groups on groups.groups_id = poeple_group.groups_id
@@ -218,7 +218,7 @@
   }
 
   function adimDataName() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $data = [];
     $cnt = 2;
@@ -327,7 +327,7 @@
             <main>
               <ul id="tabs" class="nav nav-tabs">
                   <li role="presentation">
-                    <a id="toHome" href="groups.php">
+                    <a id="toHome" href="/groups">
                       <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                     </a>
                   </li>
@@ -373,9 +373,6 @@
     if(($_SESSION['IPAddress'] == $_SERVER['REMOTE_ADDR']) && ($expireTime > date("Y-m-d H:i:s")) && ($_SESSION['BrowserData'] == $_SERVER['HTTP_USER_AGENT'])) {
       return $page;
     } else {
-      var_dump($_SESSION);
       return "Sorry something when wrong";
     }
   }
-
-  echo master();

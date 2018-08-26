@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit451014d6b5e8a485018189218870c4db
+class ComposerStaticInit699c46eabd166f67969e942dc183913c
 {
     public static $files = array (
         '81d6993f34ba74cf9a0ff12cc099912b' => __DIR__ . '/..' . '/hhvm/hhvm-autoload/src/AutoloadMap.php',
@@ -35,6 +35,16 @@ class ComposerStaticInit451014d6b5e8a485018189218870c4db
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'B' => 
+        array (
+            'Bramus' => 
+            array (
+                0 => __DIR__ . '/..' . '/bramus/router/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Facebook\\AutoloadMap\\AutoloadFilesBehavior' => __DIR__ . '/..' . '/hhvm/hhvm-autoload/src/AutoloadFilesBehavior.php',
         'Facebook\\AutoloadMap\\BasePSRFilter' => __DIR__ . '/..' . '/hhvm/hhvm-autoload/src/filters/BasePSRFilter.php',
@@ -58,36 +68,6 @@ class ComposerStaticInit451014d6b5e8a485018189218870c4db
         'Facebook\\AutoloadMap\\RootImporter' => __DIR__ . '/..' . '/hhvm/hhvm-autoload/src/builders/RootImporter.php',
         'Facebook\\AutoloadMap\\Scanner' => __DIR__ . '/..' . '/hhvm/hhvm-autoload/src/builders/Scanner.php',
         'Facebook\\AutoloadMap\\Writer' => __DIR__ . '/..' . '/hhvm/hhvm-autoload/src/Writer.php',
-        'Facebook\\HackRouter\\BaseRouter' => __DIR__ . '/..' . '/facebook/hack-router/src/router/BaseRouter.php',
-        'Facebook\\HackRouter\\EnumRequestParameter' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/EnumRequestParameter.php',
-        'Facebook\\HackRouter\\GetFastRoutePatternFromUriPattern' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/GetFastRoutePatternFromUriPattern.php',
-        'Facebook\\HackRouter\\GetUriBuilderFromUriPattern' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/GetUriBuilderFromUriPattern.php',
-        'Facebook\\HackRouter\\HasFastRouteFragment' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/HasFastRouteFragment.php',
-        'Facebook\\HackRouter\\HasUriPattern' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/HasUriPattern.php',
-        'Facebook\\HackRouter\\HttpException' => __DIR__ . '/..' . '/facebook/hack-router/src/http-exceptions/HttpException.php',
-        'Facebook\\HackRouter\\HttpMethod' => __DIR__ . '/..' . '/facebook/hack-router/src/router/HttpMethod.php',
-        'Facebook\\HackRouter\\IntRequestParameter' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/IntRequestParameter.php',
-        'Facebook\\HackRouter\\InternalServerErrorException' => __DIR__ . '/..' . '/facebook/hack-router/src/http-exceptions/InternalServerErrorException.php',
-        'Facebook\\HackRouter\\MethodNotAllowedException' => __DIR__ . '/..' . '/facebook/hack-router/src/http-exceptions/MethodNotAllowedException.php',
-        'Facebook\\HackRouter\\NotFoundException' => __DIR__ . '/..' . '/facebook/hack-router/src/http-exceptions/NotFoundException.php',
-        'Facebook\\HackRouter\\RequestParameter' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/RequestParameter.php',
-        'Facebook\\HackRouter\\RequestParameterGetters' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/RequestParameterGetters.php',
-        'Facebook\\HackRouter\\RequestParameters' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/RequestParameters.php',
-        'Facebook\\HackRouter\\RequestParametersBase' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/RequestParametersBase.php',
-        'Facebook\\HackRouter\\StringRequestParameter' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/StringRequestParameter.php',
-        'Facebook\\HackRouter\\StringRequestParameterSlashes' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/StringRequestParameter.php',
-        'Facebook\\HackRouter\\TypedRequestParameter' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/TypedRequestParameter.php',
-        'Facebook\\HackRouter\\TypedUriParameter' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/TypedUriParameter.php',
-        'Facebook\\HackRouter\\UnknownRouterException' => __DIR__ . '/..' . '/facebook/hack-router/src/router/UnknownRouterException.php',
-        'Facebook\\HackRouter\\UriBuilder' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriBuilder.php',
-        'Facebook\\HackRouter\\UriBuilderBase' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriBuilderBase.php',
-        'Facebook\\HackRouter\\UriBuilderGetPath' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriBuilderGetPath.php',
-        'Facebook\\HackRouter\\UriBuilderSetters' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriBuilderSetters.php',
-        'Facebook\\HackRouter\\UriBuilderWithPath' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriBuilderWithPath.php',
-        'Facebook\\HackRouter\\UriParameter' => __DIR__ . '/..' . '/facebook/hack-router/src/request-parameters/UriParameter.php',
-        'Facebook\\HackRouter\\UriPattern' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriPattern.php',
-        'Facebook\\HackRouter\\UriPatternLiteral' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriPatternLiteral.php',
-        'Facebook\\HackRouter\\UriPatternPart' => __DIR__ . '/..' . '/facebook/hack-router/src/uri-patterns/UriPatternPart.php',
         'FredEmmott\\HackErrorSuppressor' => __DIR__ . '/..' . '/fredemmott/hack-error-suppressor/src/HackErrorSuppressor.php',
         'FredEmmott\\ScopedHackErrorSuppressor' => __DIR__ . '/..' . '/fredemmott/hack-error-suppressor/src/ScopedHackErrorSuppressor.php',
     );
@@ -95,9 +75,10 @@ class ComposerStaticInit451014d6b5e8a485018189218870c4db
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit451014d6b5e8a485018189218870c4db::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit451014d6b5e8a485018189218870c4db::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit451014d6b5e8a485018189218870c4db::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit699c46eabd166f67969e942dc183913c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit699c46eabd166f67969e942dc183913c::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit699c46eabd166f67969e942dc183913c::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit699c46eabd166f67969e942dc183913c::$classMap;
 
         }, null, ClassLoader::class);
     }

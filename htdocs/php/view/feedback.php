@@ -1,7 +1,7 @@
 <?hh
   function feedbackData() {
     // require('../controller/defense.php');
-    require('../model/db.php');
+    require('php/model/db.php');
     $token = makeToken();
     $toGroups = [<option value="-1"> </option>];
     $toRating = [];
@@ -46,7 +46,7 @@
               <p class="text-warning">Feedback</p>
             </div>
             <div class="panel-body">
-              <form id="feedBack" action="../controller/action.php" method="post">
+              <form id="feedBack" action="php/controller/action.php" method="post">
                   <input type="hidden" name="action" value="giveFeedback"/>
                   <div class="form-group">
                     <label for="selectGroupFeedback">Select a group</label>

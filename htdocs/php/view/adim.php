@@ -13,7 +13,7 @@
   }
 
   function getData() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $toGroups = [];
     $cnt = 2;
@@ -47,7 +47,7 @@
   }
 
   function adimData() {
-    // require('../controller/defense.php');
+    // require('php/controller/defense.php');
     $token = makeToken();
     $access = getAccessAdmin();
     $data = getData();
@@ -80,7 +80,7 @@
         );
       } else {
         $panelData = (
-          <form id="adimEnter" action="../controller/action.php" method="post">
+          <form id="adimEnter" action="php/controller/action.php" method="post">
             <input type="hidden" name="action" value="adim"/>
             <div class="form-group">
               <label for="selectGroupFeedback"><abbr title="Administrator">Admin</abbr> Key</label>
@@ -93,7 +93,7 @@
       }
     } else {
       $panelData = (
-        <form id="adimEnter" action="../controller/action.php" method="post">
+        <form id="adimEnter" action="php/controller/action.php" method="post">
           <input type="hidden" name="action" value="adim"/>
           <div class="form-group">
             <label for="selectGroupFeedback"><abbr title="Administrator">Admin</abbr> Key</label>

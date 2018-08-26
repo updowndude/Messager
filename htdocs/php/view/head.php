@@ -13,9 +13,9 @@
       <!-- mobile friendly -->
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <!-- links to rescoures -->
-      <link rel="stylesheet" type="text/css" href="../../public/dist/myStyle.css"/>
-      <link rel="icon" type="image/x-icon" href="../../public/images/favicon.ico"/>
-      <link rel="shortcut icon" type="image/x-icon" href="../../public/images/favicon.ico"/>
+      <link rel="stylesheet" type="text/css" href="public/dist/myStyle.css"/>
+      <link rel="icon" type="image/x-icon" href="public/images/favicon.ico"/>
+      <link rel="shortcut icon" type="image/x-icon" href="public/images/favicon.ico"/>
       <title>{$strNewTitle}</title>
     </head>
     );

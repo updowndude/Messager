@@ -1,7 +1,7 @@
 <?hh
   function groupsDisplay() {
-    require('../model/db.php');
-    // require('../controller/defense.php');
+    require('php/model/db.php');
+    // require('php/controller/defense.php');
     $token = makeToken();
     $data = [];
     $cnt = 2;
@@ -19,13 +19,13 @@
             $row = "danger";
           }
           array_push($data,(<div class="well personGroups {$row}">
-              <form action="../controller/action.php" method="post">
+              <form action="php/controller/action.php" method="post">
                 <input type="hidden" name="action" value="seeWhoPosts"/>
                 <input class="searchMe" type="hidden" value={$curName} name="whoPost"/>
                 <input type="hidden" name="token" value={$token} />
                 <button type="submit" class="btn btn-{$row}"><strong>{$curName}</strong></button>
               </form>
-              <form action="../controller/action.php" method="post">
+              <form action="php/controller/action.php" method="post">
                 <input type="hidden" name="action" value="delateGroup"/>
                 <input type="hidden" name="groupID" value={$curFeedback['groups_id']}/>
                 <input type="hidden" name="token" value={$token} />
@@ -44,8 +44,8 @@
   }
 
   function groupDisplayHelper() {
-    require('../model/db.php');
-    // require('../controller/defense.php');
+    require('php/model/db.php');
+    // require('php/controller/defense.php');
     $token = makeToken();
     $strText = [];
     $cnt = 2;
@@ -65,7 +65,7 @@
       }
 
       array_push($strText, (<div class="well personGroups {$row}">
-          <form action="../controller/action.php" method="post">
+          <form action="php/controller/action.php" method="post">
             <input type="hidden" name="action" value="seeWhoPosts"/>
             <input class="searchMe" type="hidden" value={$curName} name="whoPost"/>
             <input type="hidden" name="token" value={$token} />
@@ -89,7 +89,7 @@
   }
 
   function groupUsersFromGroup() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $toGroups = [];
 
@@ -106,7 +106,7 @@
   }
 
   function groupUsersFromUser() {
-    require('../model/db.php');
+    require('php/model/db.php');
 
     $users = [];
 
@@ -121,8 +121,8 @@
   }
 
   function groupUserForm() {
-    require('../model/db.php');
-    // require('../controller/defense.php');
+    require('php/model/db.php');
+    // require('php/controller/defense.php');
     $token = makeToken();
     $users = [];
     $toGroups = [];
@@ -151,7 +151,7 @@
     }
 
     return (
-      <form id="groupUserForm" action="../controller/action.php" method="post">
+      <form id="groupUserForm" action="php/controller/action.php" method="post">
         <input type="hidden" name="action" value="addUsersToGroup"/>
         <div class="form-group">
           <label for="Name">Add user</label>
@@ -172,11 +172,11 @@
   }
 
   function groupForm() {
-    // require('../controller/defense.php');
+    // require('php/controller/defense.php');
     $token = makeToken();
 
     return (
-      <form id="groupForm" action="../controller/action.php" method="post">
+      <form id="groupForm" action="php/controller/action.php" method="post">
         <input type="hidden" name="action" value="addGroup"/>
         <div class="form-group">
           <label for="Name">Name</label>
